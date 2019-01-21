@@ -9,5 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "excel4node": "^1.7.0"
+  }
 }
