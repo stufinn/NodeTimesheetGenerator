@@ -47,32 +47,56 @@ let months = [
     name: 'December',
     days: 30
   }
-]
+];
 
 let ws = [];
 
-const addAll = (numSheets, wb, month) => {
 
+//ADD ALL WORKSHEETS FUNCTION
+const addAll = (numSheets, wb, month) => {
   for (let i = 1; i < (numSheets + 1); i++) {
     ws[i] = wb.addWorksheet(`Sheet ${i}`);
+  }
 
+  //define a style
+  var topRowStyle = wb.createStyle({
+    font: {
+      size: 12
+    },
+    border: {
+      top: {
+        style: 'thin'
+      },
+      right: {
+        style: 'thin'
+      },
+      bottom: {
+        style: 'thin'
+      },
+      left: {
+        style: 'thin'
+      }
+    }
+  });
+
+  //add dates to left-side columns of each spreadsheet
+  // parameter is the topRow style
+  addDates(topRowStyle);
 }
 
-//add dates to left-side columns of each spreadsheet
-addDates();
-
-}
-
-const addDates = () => {
+const addDates = (topRow) => {
 
   for (let j = 0; j < (ws.length - 1); j++ ) {
 
     for (let k = 1; k <= months[j].days; k++) {
       ws[j+1].cell(1 + k, 1)
-      .string(`${months[j].name} ${k}`);
+      .string(`${months[j].name} ${k}`)
+      .style(topRow);  //apply style
     }
     // console.log(months[j].name);
   };
 }
+
+// const addTitles = ()
 
 module.exports = {addAll};
