@@ -1,5 +1,6 @@
-const startingRow = 1;
-const startingColumn = 1;
+// variables to assign where the top left hand corner of the table should occur
+const startingRow = 6;
+const startingColumn = 5;
 
 let worksheet = [];
 
@@ -136,7 +137,7 @@ const addDates = (cW) => {
 
 const addCategories = (cW) => {
   for (let x = 0; x < categories.length; x++) {
-    worksheet[cW].cell(startingRow, x + 1)
+    worksheet[cW].cell(startingRow, startingColumn + x)
       .string(`${categories[x].name}`);
   } 
 };
