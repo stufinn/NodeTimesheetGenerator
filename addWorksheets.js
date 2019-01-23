@@ -1,3 +1,5 @@
+const xl = require('excel4node');
+
 const months = [
   {
     name: "January",
@@ -51,7 +53,6 @@ const months = [
 
 // These are the categories of time that employees can log
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
-
 const categories = [
   {
     name: 'Date',
@@ -118,19 +119,58 @@ const categories = [
 
 let ws = [];
 
+function createAllWorkSheets(workbook) {
 
-//ADD ALL WORKSHEETS FUNCTION
-const addAll = (numSheets, wb, month) => {
-  for (let i = 1; i < (numSheets + 1); i++) {
-    ws[i] = wb.addWorksheet(`Sheet ${i}`, {
-      'sheetFormat': {
-        'baseColWidth': 12
-      }
-    });
+  //for each of the worksheets (i.e. numSheets), do the following:
+  // cW ==> current Worksheet
+  for (let cW = 1; cW < 12 + 1; cW++) {
+
+    //add a worksheet
+    addSheet(workbook, cW);
+    
+    //add dates to each sheet
+    addDates(cW);
+
+    //add top-row categories
+    addCategories(cW);
+
+    //add styles to sheet
+    addStyles(workbook, cW);
+
   }
+}
 
-  //define a style
-  var titleStyle = wb.createStyle({
+//  HELPER FUNCTIONS
+
+const addSheet = (workbook, number) => {
+  ws[number] = workbook.addWorksheet(`sheet ${number}`, {
+    'sheetFormat': {
+      'baseColWidth': 12
+    }
+  });
+}
+
+const addDates = (cW) => {
+  for (let i = 1; i <= months[cW-1].days; i++) {
+    ws[cW].cell(1 + i, 1)
+    .string(`${months[cW-1].name} ${i}`)
+    // .style(titleStyle);  //apply style
+  }
+};
+
+const addCategories = (cW) => {
+  for (let x = 0; x < categories.length; x++) {
+    ws[cW].cell(1, x + 1)
+      .string(`${categories[x].name}`);
+      // .style(titleStyle)
+      // .style(centerStyle);
+  } 
+};
+
+const addStyles = (workbook,cW) => {
+
+  // Define worksheet styles
+  var titleStyle = workbook.createStyle({
     font: {
       size: 12,
       bold: true
@@ -151,22 +191,16 @@ const addAll = (numSheets, wb, month) => {
     }
   });
 
-  var centerStyle = wb.createStyle({
-    alignment: {
-      horizontal: 'center'
-    }
-  });
-
-  var coreCellStyle = wb.createStyle({
+  var coreCellStyle = workbook.createStyle({
     border: {
       top: {
-        style: 'thin'
+        style: 'dotted'
       },
       right: {
         style: 'thin'
       },
       bottom: {
-        style: 'thin'
+        style: 'dotted'
       },
       left: {
         style: 'thin'
@@ -174,54 +208,36 @@ const addAll = (numSheets, wb, month) => {
     }
   });
 
-  //add dates to left-side columns of each spreadsheet
-  // parameter is the topRow style
-  addDates(titleStyle);
-
-  addTitles(titleStyle, centerStyle);
-
-  formatCoreCells(coreCellStyle);
-}
-
-const addDates = (titleStyle) => {
-
-  // for each _worksheet_ do...
-  for (let j = 0; j < (ws.length - 1); j++ ) {
-    // for each day in the month do...
-    for (let k = 1; k <= months[j].days; k++) {
-      ws[j+1].cell(1 + k, 1)
-      .string(`${months[j].name} ${k}`)
-      .style(titleStyle);  //apply style
+  var centerStyle = workbook.createStyle({
+    alignment: {
+      horizontal: 'center'
     }
-    // console.log(months[j].name);
-  };
-};
+  });
 
-const addTitles = (titleStyle, centerStyle) => {
 
-  // for each _worksheet_ do...
-  for (let j = 0; j < (ws.length - 1); j++ ) {
-    //for each time-categort do...
-    for (let x = 0; x < categories.length; x++) {
-      ws[j+1].cell(1, x + 1)
-        .string(`${categories[x].name}`)
-        .style(titleStyle)
+  //add Styling to dates column
+  for (let i = 0; i < months[cW-1].days; i++) {
+    ws[cW].cell(2 + i,1)
+    .style(titleStyle);
+  }
+
+  //add styling to titles row
+  for (let j = 0; j < categories.length; j++) {
+    ws[cW].cell(1,1 + j)
+      .style(titleStyle)
+      .style(centerStyle);
+  }
+
+  //add styling to core cells
+  for (let k = 0; k < categories.length-1; k++) {
+    for (l = 0; l < months[cW-1].days; l++) {
+      ws[cW].cell(2+l,2+k)
+        .style(coreCellStyle)
         .style(centerStyle);
-    } 
+    }
   }
 };
 
-const formatCoreCells = (style) => {
-  // for each _worksheet_ do...
-  for (let j = 0; j < (ws.length - 1); j++ ) {
-   // for each core-cell do..
-   for (let y = 1; y < (months[j].days + 1); y++ ) {
-     for (let z = 0; z < (categories.length - 1); z++) {
-       ws[j+1].cell(y+1, z+2)
-         .style(style);
-     }
-   }
-  }
-}
+// -----END of helper functions
 
-module.exports = {addAll};
+module.exports = {createAllWorkSheets};

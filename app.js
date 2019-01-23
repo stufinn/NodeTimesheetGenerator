@@ -9,10 +9,10 @@ var wb = new xl.Workbook();
 //passes in the excel workbook object
 //modify it to accept the starting month and auto-generate all of the sheets
 
-var sheetsToAdd = 12;
-var startMonth = 0;
+// var sheetsToAdd = 12;
+// var startMonth = 0;
 
-addWorkSheets.addAll(sheetsToAdd, wb, startMonth);
+addWorkSheets.createAllWorkSheets(wb);
 
 // Add date to file name
 const monthNames = ["January", "February", "March", "April", "May", "June",
