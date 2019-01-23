@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "excel4node": "^1.7.0"
+    "excel4node": "^1.7.0",
+    "nodemon": "^1.18.9"
   }
 }
