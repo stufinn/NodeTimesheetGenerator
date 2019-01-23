@@ -14,9 +14,13 @@ var startMonth = 0;
 
 addWorkSheets.addAll(sheetsToAdd, wb, startMonth);
 
-const currentDate = new Date();
-// console.log(currentDate);
-// console.log(currentDate.getMonth());
+// Add date to file name
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
+// const monthNumbers = ['01','02', '03', '04','05','06','07','08','09','10','11'];
 
-wb.write('./excelFiles/FirstTry.xlsx');
+let currentDate = new Date();
+
+wb.write(`./excelFiles/${currentDate.toDateString()} ${currentDate.toTimeString()}.xlsx`);
