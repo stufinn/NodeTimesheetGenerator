@@ -1,3 +1,6 @@
+const startingRow = 1;
+const startingColumn = 1;
+
 let worksheet = [];
 
 const categories = [
@@ -125,21 +128,24 @@ const addSheet = (workbook, cW) => {
 }
 
 const addDates = (cW) => {
-  for (let i = 1; i <= months[cW-1].days; i++) {
-    worksheet[cW].cell(1 + i, 1)
-    .string(`${months[cW-1].name} ${i}`)
-    // .style(titleStyle);  //apply style
+  for (let i = 0; i < months[cW-1].days; i++) {
+    worksheet[cW].cell( (startingRow+1) + i, startingColumn)
+    .string(`${months[cW-1].name} ${i+1}`);
   }
 };
 
 const addCategories = (cW) => {
   for (let x = 0; x < categories.length; x++) {
-    worksheet[cW].cell(1, x + 1)
+    worksheet[cW].cell(startingRow, x + 1)
       .string(`${categories[x].name}`);
-      // .style(titleStyle)
-      // .style(centerStyle);
   } 
 };
+
+// const addFormulas = () => {
+//   let topTotalCell = 
+//   for (let z = 0; z <)
+
+// };
 
 const addStyles = (workbook,cW) => {
 
@@ -192,13 +198,13 @@ const addStyles = (workbook,cW) => {
 
   //add Styling to dates column
   for (let i = 0; i < months[cW-1].days; i++) {
-    worksheet[cW].cell(2 + i,1)
+    worksheet[cW].cell((startingRow+1) + i,startingColumn)
     .style(titleStyle);
   }
 
   //add styling to titles row
   for (let j = 0; j < categories.length; j++) {
-    worksheet[cW].cell(1,1 + j)
+    worksheet[cW].cell(startingRow, startingColumn + j)
       .style(titleStyle)
       .style(centerStyle);
   }
@@ -206,7 +212,7 @@ const addStyles = (workbook,cW) => {
   //add styling to core cells
   for (let k = 0; k < categories.length-1; k++) {
     for (l = 0; l < months[cW-1].days; l++) {
-      worksheet[cW].cell(2+l,2+k)
+      worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
         .style(coreCellStyle)
         .style(centerStyle);
     }
