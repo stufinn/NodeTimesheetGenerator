@@ -21,6 +21,8 @@ function createAllWorkSheets(workbook) {
 
     //add styles to sheet
     helpers.addStyles(workbook,cW);
+
+    helpers.addFormulas(cW);
   }
 }
 
