@@ -1,5 +1,6 @@
 const xl = require('excel4node');
 const addWorkSheets = require('./addWorksheets');
+const fs = require("fs");
 
 var wb = new xl.Workbook();
 
@@ -17,5 +18,13 @@ addWorkSheets.createAllWorkSheets(wb);
 // const monthNumbers = ['01','02', '03', '04','05','06','07','08','09','10','11'];
 
 let currentDate = new Date();
+let customDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}_${currentDate.getHours()}-${currentDate.getMinutes()}-${currentDate.getSeconds()}`;
+let fileName = `./excelFiles/${customDate}.xlsx`;
 
-wb.write(`./excelFiles/${currentDate.toDateString()} ${currentDate.toTimeString()}.xlsx`);
+// wb.write(`./excelFiles/${currentDate.toDateString()} ${currentDate.toTimeString()}.xlsx`);
+wb.write(fileName);
+// fs.open(fileName, 'r+', (err,fd) => {
+//   if(err) {
+//     console.log('There was an error', err.code\);
+//   }
+// } );
