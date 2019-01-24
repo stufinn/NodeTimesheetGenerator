@@ -125,7 +125,8 @@ const months = [
 const addSheet = (workbook, cW) => {
   worksheet[cW] = workbook.addWorksheet(`${months[cW-1].name}`, {
     'sheetFormat': {
-      'baseColWidth': 12
+      // 'baseColWidth': 20
+      // 'defaultColWidth': 20
     }
   });
 }
@@ -192,19 +193,25 @@ const addStyles = (workbook,cW) => {
     }
   });
 
+  var categoryStyle = workbook.createStyle({
+    alignment: {
+      textRotation: 45,
+    }
+  })
+
   var coreCellStyle = workbook.createStyle({
     border: {
       top: {
         style: 'dotted'
       },
       right: {
-        style: 'thin'
+        style: 'dotted'
       },
       bottom: {
         style: 'dotted'
       },
       left: {
-        style: 'thin'
+        style: 'dotted'
       }
     }
   });
@@ -215,29 +222,79 @@ const addStyles = (workbook,cW) => {
     }
   });
 
+  var blueFillStyle = workbook.createStyle({
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      bgColor: '#0000ff'
+    }
+  });
+
+  var bottomTotalsStyle = workbook.createStyle({
+    font: {
+      bold: true
+    },
+    border: {
+      top: {
+        style: 'double'
+      }
+    }
+  });
+
+  var daysTotalStyle = workbook.createStyle({
+    font: {
+      bold: true
+    },
+    border: {
+      left: {
+        style: 'thick'
+      },
+      right: {
+        style: 'thin'
+      }
+    }
+  })
+
+  // var dateStyle = workbook.createStyle({
+  //   alignment: {
+  //     baseColWidth: 20
+  //   }
+  // })
+
   //  -- end of define styles -- //
 
-  //add Styling to dates column
-  for (let i = 0; i < months[cW-1].days; i++) {
-    worksheet[cW].cell((startingRow+1) + i,startingColumn)
-    .style(titleStyle);
-  }
 
-  //add styling to titles row
+
+  //add styling to titles row AND bottom totals row
   for (let j = 0; j < categories.length; j++) {
     worksheet[cW].cell(startingRow, startingColumn + j)
       .style(titleStyle)
+      .style(centerStyle)
+      .style(categoryStyle);
+
+    worksheet[cW].cell(startingRow + months[cW-1].days + 1, startingColumn + j)
+      .style(bottomTotalsStyle)
       .style(centerStyle);
   }
 
   //add styling to core cells
   for (let k = 0; k < categories.length-1; k++) {
+    worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
     for (l = 0; l < months[cW-1].days; l++) {
       worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
         .style(coreCellStyle)
         .style(centerStyle);
     }
   }
+
+    //add Styling to dates column AND dates total column
+    for (let i = 0; i < months[cW-1].days; i++) {
+      worksheet[cW].column(startingColumn).setWidth(13);
+      worksheet[cW].cell((startingRow+1) + i,startingColumn)
+      .style(titleStyle);
+      worksheet[cW].cell(startingRow + 1 + i, startingColumn + categories.length - 1)
+        .style(daysTotalStyle);
+    }
 };
 
 module.exports = {
