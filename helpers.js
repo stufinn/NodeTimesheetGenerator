@@ -1,10 +1,14 @@
 const xl = require('excel4node');
+// const dateGen = require('./dateGenerator');
 
 // variables to assign where the top left hand corner of the table should occur
 const startingRow = 2;
 const startingColumn = 2;
 
 let worksheet = [];
+
+// let datesArray = dateGen.arrayOfDates();
+
 
 const categories = [
   {
@@ -122,8 +126,8 @@ const months = [
 ];
 
 
-const addSheet = (workbook, cW) => {
-  worksheet[cW] = workbook.addWorksheet(`${months[cW-1].name}`, {
+const addSheet = (workbook, cW, datesArray) => {
+  worksheet[cW] = workbook.addWorksheet(`${datesArray[cW-1].name}`, {
     'sheetFormat': {
       // 'baseColWidth': 20
       // 'defaultColWidth': 20
