@@ -168,11 +168,6 @@ const addFormulas = (cW) => {
 
 };
 
-//   //define formula
-  // let formula = SUM(first cell in current row:LastDaysTotCellInCurrentRow)
-
-// };
-
 const addStyles = (workbook,cW) => {
 
   // Define worksheet styles
