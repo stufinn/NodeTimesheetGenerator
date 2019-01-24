@@ -6,10 +6,10 @@ const helpers = require('./helpers');
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
 let year = 2019;
-let numMonths = 12;
+let numMonths = 16;
 
 const datesArray = dateGen.arrayOfDates(year,numMonths);
-console.log(datesArray);
+// console.log(datesArray);
 
 function createAllWorkSheets(workbook) {
 
@@ -27,9 +27,9 @@ function createAllWorkSheets(workbook) {
     helpers.addCategories(cW);
 
     //add styles to sheet
-    helpers.addStyles(workbook,cW);
+    helpers.addStyles(workbook,cW, datesArray);
 
-    helpers.addFormulas(cW);
+    helpers.addFormulas(cW, datesArray);
   }
 }
 

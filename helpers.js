@@ -149,19 +149,19 @@ const addCategories = (cW) => {
   } 
 };
 
-const addFormulas = (cW) => {
+const addFormulas = (cW, datesArray) => {
   // Total (per day)
   let daysTotalsCol = startingColumn + categories.length - 1;
   let startDaysTotalRow = startingRow + 1;
 
-  for (let m = 0; m < months[cW-1].days; m++) {
+  for (let m = 0; m < datesArray[cW-1].dates.length; m++) {
     let firstDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, startingColumn + 1 );
     let lastDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, daysTotalsCol - 1);
     worksheet[cW].cell(startDaysTotalRow + m, daysTotalsCol)
       .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
   }
   // Total (per category)
-  let categoryTotRow = startingRow + months[cW-1].days + 1;
+  let categoryTotRow = startingRow + datesArray[cW-1].dates.length + 1;
   let startCategoryTotCol = startingColumn + 1;
 
   for (let n = 0; n < categories.length-1; n++) {
@@ -173,7 +173,7 @@ const addFormulas = (cW) => {
 
 };
 
-const addStyles = (workbook,cW) => {
+const addStyles = (workbook,cW, datesArray) => {
 
   // Define worksheet styles
   var titleStyle = workbook.createStyle({
@@ -288,7 +288,7 @@ const addStyles = (workbook,cW) => {
       .style(centerStyle)
       .style(categoryStyle);
 
-    worksheet[cW].cell(startingRow + months[cW-1].days + 1, startingColumn + j)
+    worksheet[cW].cell(startingRow + datesArray[cW-1].dates.length + 1, startingColumn + j)
       .style(bottomTotalsStyle)
       .style(centerStyle);
   }
@@ -296,7 +296,7 @@ const addStyles = (workbook,cW) => {
   //add styling to core cells
   for (let k = 0; k < categories.length-1; k++) {
     worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
-    for (l = 0; l < months[cW-1].days; l++) {
+    for (l = 0; l < datesArray[cW-1].dates.length; l++) {
       worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
         .style(coreCellStyle)
         .style(centerStyle);
@@ -304,7 +304,7 @@ const addStyles = (workbook,cW) => {
   }
 
     //add Styling to dates column AND dates total column
-    for (let i = 0; i < months[cW-1].days; i++) {
+    for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
       worksheet[cW].column(startingColumn).setWidth(18);
       worksheet[cW].cell((startingRow+1) + i,startingColumn)
       .style(titleStyle)
