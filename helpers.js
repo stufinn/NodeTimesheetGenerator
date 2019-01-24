@@ -7,9 +7,6 @@ const startingColumn = 2;
 
 let worksheet = [];
 
-// let datesArray = dateGen.arrayOfDates();
-
-
 const categories = [
   {
     name: 'Date',
@@ -212,12 +209,6 @@ const addStyles = (workbook,cW, datesArray) => {
       horizontal: 'right'
     }
   });
-
-  // var dateStyle = workbook.createStyle({
-  //   alignment: {
-  //     baseColWidth: 20
-  //   }
-  // })
 
   // fill: {
   //   type: 'pattern',
