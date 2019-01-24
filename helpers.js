@@ -135,10 +135,10 @@ const addSheet = (workbook, cW, datesArray) => {
   });
 }
 
-const addDates = (cW) => {
-  for (let i = 0; i < months[cW-1].days; i++) {
+const addDates = (cW, datesArray) => {
+  for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
     worksheet[cW].cell( (startingRow+1) + i, startingColumn)
-    .string(`${months[cW-1].name} ${i+1}`);
+    .string(`${datesArray[cW-1].dates[i]}`);
   }
 };
 
