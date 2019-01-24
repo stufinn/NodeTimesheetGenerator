@@ -1,4 +1,4 @@
-# NodeTimesheetGenerator
+# Node.js Timesheet Generator
 
 Creates a set of MS Excel timesheets using Node.JS and the excel4node module.
 
