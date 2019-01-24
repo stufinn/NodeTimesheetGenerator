@@ -257,13 +257,25 @@ const addStyles = (workbook,cW) => {
         style: 'thin'
       }
     }
-  })
+  });
+  
+  var dateStyle = workbook.createStyle({
+    alignment: {
+      horizontal: 'right'
+    }
+  });
 
   // var dateStyle = workbook.createStyle({
   //   alignment: {
   //     baseColWidth: 20
   //   }
   // })
+
+  // fill: {
+  //   type: 'pattern',
+  //   patternType: 'solid',
+  //   color: '#0000ff'
+  // }
 
   //  -- end of define styles -- //
 
@@ -293,9 +305,10 @@ const addStyles = (workbook,cW) => {
 
     //add Styling to dates column AND dates total column
     for (let i = 0; i < months[cW-1].days; i++) {
-      worksheet[cW].column(startingColumn).setWidth(13);
+      worksheet[cW].column(startingColumn).setWidth(18);
       worksheet[cW].cell((startingRow+1) + i,startingColumn)
-      .style(titleStyle);
+      .style(titleStyle)
+      .style(dateStyle);
       worksheet[cW].cell(startingRow + 1 + i, startingColumn + categories.length - 1)
         .style(daysTotalStyle);
     }
