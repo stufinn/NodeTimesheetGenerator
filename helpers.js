@@ -1,6 +1,8 @@
+const xl = require('excel4node');
+
 // variables to assign where the top left hand corner of the table should occur
-const startingRow = 6;
-const startingColumn = 5;
+const startingRow = 2;
+const startingColumn = 2;
 
 let worksheet = [];
 
@@ -142,9 +144,32 @@ const addCategories = (cW) => {
   } 
 };
 
-// const addFormulas = () => {
-//   let topTotalCell = 
-//   for (let z = 0; z <)
+const addFormulas = (cW) => {
+  // Total (per day)
+  let daysTotalsCol = startingColumn + categories.length - 1;
+  let startDaysTotalRow = startingRow + 1;
+
+  for (let m = 0; m < months[cW-1].days; m++) {
+    let firstDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, startingColumn + 1 );
+    let lastDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, daysTotalsCol - 1);
+    worksheet[cW].cell(startDaysTotalRow + m, daysTotalsCol)
+      .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
+  }
+  // Total (per category)
+  let categoryTotRow = startingRow + months[cW-1].days + 1;
+  let startCategoryTotCol = startingColumn + 1;
+
+  for (let n = 0; n < categories.length-1; n++) {
+    let firstCategTotCell = xl.getExcelCellRef(startingRow + 1, startCategoryTotCol + n);
+    let lastCategTotCell = xl.getExcelCellRef( categoryTotRow - 1, startCategoryTotCol + n );
+    worksheet[cW].cell(categoryTotRow, startCategoryTotCol + n)
+      .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
+  }
+
+};
+
+//   //define formula
+  // let formula = SUM(first cell in current row:LastDaysTotCellInCurrentRow)
 
 // };
 
@@ -224,5 +249,6 @@ module.exports = {
   addStyles,
   addSheet,
   addDates,
-  addCategories
+  addCategories,
+  addFormulas
 };
