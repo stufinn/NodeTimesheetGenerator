@@ -4,6 +4,8 @@ const xl = require('excel4node');
 // variables to assign where the top left hand corner of the table should occur
 const startingRow = 2;
 const startingColumn = 2;
+//start second table X rows below first
+const tableGap = 5;
 
 let worksheet = [];
 
@@ -80,11 +82,30 @@ const addSheet = (workbook, cW, bothPayPeriods) => {
   });
 }
 
-const addDates = (cW, datesArray) => {
-  for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
+const addDates = (cW, bothPayPeriods) => {
+
+  let payPeriod1 = bothPayPeriods[cW-1].payPeriod1;
+  let payPeriod2 = bothPayPeriods[cW-1].payPeriod2;
+  //start second table X rows below first
+  let startTable2 = startingRow + payPeriod1.length + tableGap;
+
+  //insert dates for first pay period
+  for (let i = 0; i < payPeriod1.length; i++) {
     worksheet[cW].cell( (startingRow+1) + i, startingColumn)
-    .string(`${datesArray[cW-1].dates[i]}`);
+      .string(`${payPeriod1[i]}`);
   }
+
+  //insert dates for second pay period below first table
+  for (let j = 0; j < payPeriod2.length; j++) {
+    worksheet[cW].cell( startTable2 + j, startingColumn)
+    .string(`${payPeriod2[j]}`);
+  }
+
+
+  // for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
+  //   worksheet[cW].cell( (startingRow+1) + i, startingColumn)
+  //   .string(`${datesArray[cW-1].dates[i]}`);
+  // }
 };
 
 const addCategories = (cW) => {

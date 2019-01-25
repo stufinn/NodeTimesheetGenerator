@@ -62,7 +62,7 @@ function arrayOfDates(year, numMonths, firstDueDay) {
     
 
   }
-  console.log(bothPayPeriods);
+  // console.log(bothPayPeriods);
   return bothPayPeriods;
 
 }

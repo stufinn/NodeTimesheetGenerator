@@ -5,7 +5,7 @@ const helpers = require('./helpers');
 // These are the categories of time that employees can log
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
-let firstDueDay = 26;
+let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
 let year = 2019;
 let numMonths = 2;
 
@@ -22,7 +22,7 @@ function createAllWorkSheets(workbook) {
     helpers.addSheet(workbook, cW, bothPayPeriods);
     
     // //add dates to each sheet
-    // helpers.addDates(cW, datesArray);
+    helpers.addDates(cW, bothPayPeriods);
 
     // //add top-row categories
     // helpers.addCategories(cW);
