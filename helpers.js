@@ -240,11 +240,15 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     },
     border: {
       left: {
-        style: 'thick'
+        style: 'double'
       },
       right: {
         style: 'thin'
+      },
+      top: {
+        style: 'dotted'
       }
+
     }
   });
   
@@ -314,14 +318,34 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
     //add Styling to dates column AND dates total column
 
-    // for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
-    //   worksheet[cW].column(startingColumn).setWidth(18);
-    //   worksheet[cW].cell((startingRow+1) + i,startingColumn)
-    //   .style(titleStyle)
-    //   .style(dateStyle);
-    //   worksheet[cW].cell(startingRow + 1 + i, startingColumn + categories.length - 1)
-    //     .style(daysTotalStyle);
-    // }
+  function styleDatesColumn(cW, numDates, initRow) {
+    for (let i = 0; i < numDates; i++) {
+      worksheet[cW].cell(initRow + i, startingColumn)
+      .style(titleStyle)
+      .style(dateStyle);
+    }
+  }
+
+  function styleDateTotalsColumn(cW, numDates, initRow, totColLoc) {
+    for (let p = 0; p < numDates; p++) {
+      worksheet[cW].cell(initRow + p, totColLoc)
+        .style(daysTotalStyle);
+    }
+  }
+
+  let initRow1 = startingRow + 1;
+  let initRow2 = startingRow + pay_Per1.length + tableGap;
+  let totColLoc = startingColumn + categories.length - 1;
+  let numDates1 = pay_Per1.length;
+  let numDates2 = pay_Per2.length;
+
+  worksheet[cW].column(startingColumn).setWidth(18); //keep this here
+  // Style dates and dates-total columns for first table
+  styleDatesColumn(cW, numDates1, initRow1);
+  styleDateTotalsColumn(cW, numDates1, initRow1, totColLoc);
+  // Style dates and dates-total columns for second table
+  styleDatesColumn(cW, numDates2, initRow2);
+  styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
 };
 
 module.exports = {
