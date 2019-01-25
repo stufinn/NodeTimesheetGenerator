@@ -7,7 +7,7 @@ const helpers = require('./helpers');
 
 let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
 let year = 2019;
-let numMonths = 2;
+let numMonths = 12;
 
 const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
 // console.log(datesArray);
@@ -30,7 +30,7 @@ function createAllWorkSheets(workbook) {
     helpers.addFormulas(cW, bothPayPeriods);
 
     // //add styles to sheet
-    // helpers.addStyles(workbook,cW, datesArray);
+    helpers.addStyles(workbook,cW, bothPayPeriods);
 
 
   }

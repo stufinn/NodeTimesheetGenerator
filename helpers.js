@@ -109,26 +109,6 @@ const addCategories = (cW) => {
   } 
 };
 
-
-function dateTotals(cW, startRow, daysTotalsCol, numCells) {
- for (let m = 0; m < numCells; m++) {
-   let firstDaysTotCell = xl.getExcelCellRef(startRow + m, startingColumn + 1 );
-   let lastDaysTotCell = xl.getExcelCellRef(startRow + m, daysTotalsCol - 1 );
-   worksheet[cW].cell(startRow + m, daysTotalsCol)
-   .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
- }
-}
-
-function categoryTotals(cW, startCatRow, startCol, categTotRow, numCategories){
-
-  for (let n = 0; n < numCategories; n++) {
-    let firstCategTotCell = xl.getExcelCellRef(startCatRow + 1, startCol + n);
-    let lastCategTotCell = xl.getExcelCellRef(categTotRow - 1, startCol + n);
-    worksheet[cW].cell(categTotRow, startCol + n)
-    .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
-  }
-}
-
 const addFormulas = (cW, bothPayPeriods) => {
   // Total (per day)
   let payPer1 = bothPayPeriods[cW-1].payPeriod1;
@@ -137,6 +117,26 @@ const addFormulas = (cW, bothPayPeriods) => {
   let daysTotalsCol = startingColumn + categories.length - 1;
   let startRow1 = startingRow + 1;
   let startRow2 = startingRow + payPer1.length + tableGap; //check value
+
+  function dateTotals(cW, startRow, daysTotalsCol, numCells) {
+    for (let m = 0; m < numCells; m++) {
+      let firstDaysTotCell = xl.getExcelCellRef(startRow + m, startingColumn + 1 );
+      let lastDaysTotCell = xl.getExcelCellRef(startRow + m, daysTotalsCol - 1 );
+      worksheet[cW].cell(startRow + m, daysTotalsCol)
+      .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
+    }
+   }
+   
+  function categoryTotals(cW, startCatRow, startCol, categTotRow, numCategories){
+  
+    for (let n = 0; n < numCategories; n++) {
+      let firstCategTotCell = xl.getExcelCellRef(startCatRow + 1, startCol + n);
+      let lastCategTotCell = xl.getExcelCellRef(categTotRow - 1, startCol + n);
+      worksheet[cW].cell(categTotRow, startCol + n)
+      .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
+    }
+  }
+
 
   // Add totals for first table
   dateTotals(cW, startRow1, daysTotalsCol, payPer1.length);
@@ -159,7 +159,10 @@ const addFormulas = (cW, bothPayPeriods) => {
 
 };
 
-const addStyles = (workbook,cW, datesArray) => {
+const addStyles = (workbook,cW, bothPayPeriods) => {
+
+  let pay_Per1 = bothPayPeriods[cW-1].payPeriod1;
+  let pay_Per2 = bothPayPeriods[cW-1].payPeriod2;
 
   // Define worksheet styles
   var titleStyle = workbook.createStyle({
@@ -259,39 +262,62 @@ const addStyles = (workbook,cW, datesArray) => {
 
   //  -- end of define styles -- //
 
+  // ----- Add styling to titles row AND bottom totals row --- //
 
-
-  //add styling to titles row AND bottom totals row
-  for (let j = 0; j < categories.length; j++) {
-    worksheet[cW].cell(startingRow, startingColumn + j)
-      .style(titleStyle)
-      .style(centerStyle)
-      .style(categoryStyle);
-
-    worksheet[cW].cell(startingRow + datesArray[cW-1].dates.length + 1, startingColumn + j)
-      .style(bottomTotalsStyle)
-      .style(centerStyle);
+  function styleTitles(bothPayPeriods, cW, firstRow, firstCol, j) {
+    worksheet[cW].cell(firstRow, firstCol + j)
+    .style(titleStyle)
+    .style(centerStyle)
+    .style(categoryStyle);
   }
+
+  function styleCategoryTots(bothPayPeriods, cw, catTotRow, catTotStartCol, j) {
+    worksheet[cW].cell(catTotRow, catTotStartCol + j)
+    .style(bottomTotalsStyle)
+    .style(centerStyle);
+  }
+
+  // ----  Add title styles and Category Total Styles ------ //
+  for (let j = 0; j < categories.length; j++) {
+    //style title row at top
+    styleTitles(bothPayPeriods, cW, startingRow, startingColumn, j);
+
+    // style category-totals row for first table
+    let catTotRow1 = startingRow + pay_Per1.length + 1;
+    styleCategoryTots(bothPayPeriods, cW, catTotRow1, startingColumn, j );
+   
+    // style category-totals row for second table
+    let catTotRow2 = catTotRow1 + pay_Per2.length + tableGap - 1;
+    styleCategoryTots(bothPayPeriods, cW, catTotRow2, startingColumn, j );
+
+  }
+
+
+  // ----- Add Core Cell Styling ---- //
+
+  
 
   //add styling to core cells
-  for (let k = 0; k < categories.length-1; k++) {
-    worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
-    for (l = 0; l < datesArray[cW-1].dates.length; l++) {
-      worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
-        .style(coreCellStyle)
-        .style(centerStyle);
-    }
-  }
+
+  // for (let k = 0; k < categories.length-1; k++) {
+  //   worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
+  //   for (l = 0; l < datesArray[cW-1].dates.length; l++) {
+  //     worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
+  //       .style(coreCellStyle)
+  //       .style(centerStyle);
+  //   }
+  // }
 
     //add Styling to dates column AND dates total column
-    for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
-      worksheet[cW].column(startingColumn).setWidth(18);
-      worksheet[cW].cell((startingRow+1) + i,startingColumn)
-      .style(titleStyle)
-      .style(dateStyle);
-      worksheet[cW].cell(startingRow + 1 + i, startingColumn + categories.length - 1)
-        .style(daysTotalStyle);
-    }
+
+    // for (let i = 0; i < datesArray[cW-1].dates.length; i++) {
+    //   worksheet[cW].column(startingColumn).setWidth(18);
+    //   worksheet[cW].cell((startingRow+1) + i,startingColumn)
+    //   .style(titleStyle)
+    //   .style(dateStyle);
+    //   worksheet[cW].cell(startingRow + 1 + i, startingColumn + categories.length - 1)
+    //     .style(daysTotalStyle);
+    // }
 };
 
 module.exports = {
