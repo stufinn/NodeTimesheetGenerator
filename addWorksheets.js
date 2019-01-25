@@ -25,7 +25,7 @@ function createAllWorkSheets(workbook) {
     helpers.addDates(cW, bothPayPeriods);
 
     // //add top-row categories
-    // helpers.addCategories(cW);
+    helpers.addCategories(cW);
 
     // //add styles to sheet
     // helpers.addStyles(workbook,cW, datesArray);
