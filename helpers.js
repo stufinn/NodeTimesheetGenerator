@@ -115,27 +115,48 @@ const addCategories = (cW) => {
   } 
 };
 
-const addFormulas = (cW, datesArray) => {
+
+function insertFormulas(cW, startRow, daysTotalsCol, numCells) {
+ for (let m = 0; m < numCells; m++) {
+   let firstDaysTotCell = xl.getExcelCellRef(startRow + m, startingColumn + 1 );
+   let lastDaysTotCell = xl.getExcelCellRef(startRow + m, daysTotalsCol - 1 );
+   worksheet[cW].cell(startRow + m, daysTotalsCol)
+   .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
+ }
+}
+
+const addFormulas = (cW, bothPayPeriods) => {
   // Total (per day)
+  let payPer1 = bothPayPeriods[cW-1].payPeriod1;
+  let payPer2 = bothPayPeriods[cW-1].payPeriod2;
+
   let daysTotalsCol = startingColumn + categories.length - 1;
-  let startDaysTotalRow = startingRow + 1;
+  let startRow1 = startingRow + 1;
+  let startRow2 = startingRow + payPer1.length + tableGap; //check value
 
-  for (let m = 0; m < datesArray[cW-1].dates.length; m++) {
-    let firstDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, startingColumn + 1 );
-    let lastDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, daysTotalsCol - 1);
-    worksheet[cW].cell(startDaysTotalRow + m, daysTotalsCol)
-      .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
-  }
-  // Total (per category)
-  let categoryTotRow = startingRow + datesArray[cW-1].dates.length + 1;
-  let startCategoryTotCol = startingColumn + 1;
+  // Add totals for first table
+  insertFormulas(cW, startRow1, daysTotalsCol, payPer1.length);
 
-  for (let n = 0; n < categories.length-1; n++) {
-    let firstCategTotCell = xl.getExcelCellRef(startingRow + 1, startCategoryTotCol + n);
-    let lastCategTotCell = xl.getExcelCellRef( categoryTotRow - 1, startCategoryTotCol + n );
-    worksheet[cW].cell(categoryTotRow, startCategoryTotCol + n)
-      .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
-  }
+  // Add totals for second table
+  insertFormulas(cW, startRow2, daysTotalsCol, payPer2.length);
+
+  // for (let m = 0; m < datesArray[cW-1].dates.length; m++) {
+  //   let firstDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, startingColumn + 1 );
+  //   let lastDaysTotCell = xl.getExcelCellRef(startDaysTotalRow + m, daysTotalsCol - 1);
+  //   worksheet[cW].cell(startDaysTotalRow + m, daysTotalsCol)
+  //     .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
+  // }
+
+  // // Total (per category)
+  // let categoryTotRow = startingRow + datesArray[cW-1].dates.length + 1;
+  // let startCategoryTotCol = startingColumn + 1;
+
+  // for (let n = 0; n < categories.length-1; n++) {
+  //   let firstCategTotCell = xl.getExcelCellRef(startingRow + 1, startCategoryTotCol + n);
+  //   let lastCategTotCell = xl.getExcelCellRef( categoryTotRow - 1, startCategoryTotCol + n );
+  //   worksheet[cW].cell(categoryTotRow, startCategoryTotCol + n)
+  //     .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
+  // }
 
 };
 

@@ -27,10 +27,12 @@ function createAllWorkSheets(workbook) {
     // //add top-row categories
     helpers.addCategories(cW);
 
+    helpers.addFormulas(cW, bothPayPeriods);
+
     // //add styles to sheet
     // helpers.addStyles(workbook,cW, datesArray);
 
-    // helpers.addFormulas(cW, datesArray);
+
   }
 }
 
