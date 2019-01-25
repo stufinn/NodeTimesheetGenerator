@@ -72,12 +72,7 @@ const categories = [
 ];
 
 const addSheet = (workbook, cW, datesArray) => {
-  worksheet[cW] = workbook.addWorksheet(`${datesArray[cW-1].name}`, {
-    'sheetFormat': {
-      // 'baseColWidth': 20
-      // 'defaultColWidth': 20
-    }
-  });
+  worksheet[cW] = workbook.addWorksheet(`${datesArray[cW-1].name}`);
 }
 
 const addDates = (cW, datesArray) => {
@@ -217,8 +212,6 @@ const addStyles = (workbook,cW, datesArray) => {
   // }
 
   //  -- end of define styles -- //
-
-
 
   //add styling to titles row AND bottom totals row
   for (let j = 0; j < categories.length; j++) {
