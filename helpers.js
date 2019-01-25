@@ -71,8 +71,8 @@ const categories = [
   }
 ];
 
-const addSheet = (workbook, cW, datesArray) => {
-  worksheet[cW] = workbook.addWorksheet(`${datesArray[cW-1].name}`, {
+const addSheet = (workbook, cW, bothPayPeriods) => {
+  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, {
     'sheetFormat': {
       // 'baseColWidth': 20
       // 'defaultColWidth': 20

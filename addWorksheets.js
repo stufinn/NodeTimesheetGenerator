@@ -5,10 +5,11 @@ const helpers = require('./helpers');
 // These are the categories of time that employees can log
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
+let firstDueDay = 26;
 let year = 2019;
-let numMonths = 16;
+let numMonths = 2;
 
-const datesArray = dateGen.arrayOfDates(year,numMonths);
+const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
 // console.log(datesArray);
 
 function createAllWorkSheets(workbook) {
@@ -18,18 +19,18 @@ function createAllWorkSheets(workbook) {
   for (let cW = 1; cW < numMonths + 1; cW++) {
 
     //add a worksheet
-    helpers.addSheet(workbook, cW, datesArray);
+    helpers.addSheet(workbook, cW, bothPayPeriods);
     
-    //add dates to each sheet
-    helpers.addDates(cW, datesArray);
+    // //add dates to each sheet
+    // helpers.addDates(cW, datesArray);
 
-    //add top-row categories
-    helpers.addCategories(cW);
+    // //add top-row categories
+    // helpers.addCategories(cW);
 
-    //add styles to sheet
-    helpers.addStyles(workbook,cW, datesArray);
+    // //add styles to sheet
+    // helpers.addStyles(workbook,cW, datesArray);
 
-    helpers.addFormulas(cW, datesArray);
+    // helpers.addFormulas(cW, datesArray);
   }
 }
 
