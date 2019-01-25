@@ -295,18 +295,22 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   // ----- Add Core Cell Styling ---- //
 
-  
+  function styleCoreCells(bothPayPeriods, cW, dates, coreRowStart) {
+    for (let k = 0; k < categories.length - 2; k++) {
+      worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
+      for (l = 0; l < dates.length; l++) {
+        worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+          .style(coreCellStyle)
+          .style(centerStyle);
+      }
+    }
+  }
 
-  //add styling to core cells
-
-  // for (let k = 0; k < categories.length-1; k++) {
-  //   worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
-  //   for (l = 0; l < datesArray[cW-1].dates.length; l++) {
-  //     worksheet[cW].cell((startingRow+1)+l,(startingColumn+1)+k)
-  //       .style(coreCellStyle)
-  //       .style(centerStyle);
-  //   }
-  // }
+  let coreRowStart1 = startingRow + 1;
+  //add styling to core cells for first table
+  styleCoreCells(bothPayPeriods, cW, pay_Per1, startingRow + 1);
+  //add styling to core cells for first table
+  styleCoreCells(bothPayPeriods, cW, pay_Per2, startingRow + pay_Per1.length + tableGap);
 
     //add Styling to dates column AND dates total column
 
