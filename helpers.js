@@ -5,7 +5,7 @@ const xl = require('excel4node');
 const startingRow = 2;
 const startingColumn = 1;
 //start second table X rows below first
-const tableGap = 8;
+const tableGap = 9;
 
 let worksheet = [];
 
@@ -74,12 +74,18 @@ const categories = [
 ];
 
 const addSheet = (workbook, cW, bothPayPeriods) => {
-  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, {
-    'sheetFormat': {
-      // 'baseColWidth': 20
-      // 'defaultColWidth': 20
-    }
-  });
+
+  var options = {
+    headerFooter: {
+      // 'firstHeader': 'This is the header',
+      'evenHeader': 'Shibogama First Nations Council Semi Monthly Timesheet',
+      'oddHeader': 'Shibogama First Nations Council Semi Monthly Timesheet'
+    },
+    
+  }
+
+
+  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, options);
 };
 
 const addSheetTitles = (workbook, cW, bothPayPeriods) => {
@@ -89,7 +95,8 @@ const addSheetTitles = (workbook, cW, bothPayPeriods) => {
       horizontal: 'center'
     },
     font: {
-      bold: true
+      bold: true,
+      size: 20
     }
   });
   
@@ -99,8 +106,8 @@ const addSheetTitles = (workbook, cW, bothPayPeriods) => {
     .style(tableTitleStyle);
   }
 
-  addTitle(startingRow - 1, `First Semi-Monthly Pay Period`);
-  addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period` )
+  addTitle(startingRow - 1, `First Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})`);
+  addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
   
   
