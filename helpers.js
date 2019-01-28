@@ -76,11 +76,15 @@ const categories = [
 const addSheet = (workbook, cW, bothPayPeriods) => {
 
   var options = {
-    headerFooter: {
+    'headerFooter': {
       // 'firstHeader': 'This is the header',
       'evenHeader': 'Shibogama First Nations Council Semi Monthly Timesheet',
       'oddHeader': 'Shibogama First Nations Council Semi Monthly Timesheet'
     },
+    pageSetup: {
+      'fitToHeight': 1,
+      'fitToWidth': 1
+    }
     
   }
 
