@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var wb = new xl.Workbook();
 
-  // https://stackoverflow.com/questions/6645067/javascript-dynamically-creating-variables-for-loops
+// https://stackoverflow.com/questions/6645067/javascript-dynamically-creating-variables-for-loops
 
 //modify it to accept the starting month and auto-generate all of the sheets
 
@@ -23,8 +23,3 @@ let fileName = `./excelFiles/${customDate}.xlsx`;
 
 // wb.write(`./excelFiles/${currentDate.toDateString()} ${currentDate.toTimeString()}.xlsx`);
 wb.write(fileName);
-// fs.open(fileName, 'r+', (err,fd) => {
-//   if(err) {
-//     console.log('There was an error', err.code\);
-//   }
-// } );

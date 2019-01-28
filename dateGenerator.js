@@ -1,9 +1,9 @@
-function arrayOfDates(year, numMonths) {
+function arrayOfDates(year, numMonths, firstDueDay) {
 
   // let year = 2019;
   // let numMonths = 2;
-  let startDate = new Date(`Dec 8, ${year - 1}`);
-  let endDate = new Date(`Dec 7, ${year}`);
+  let startDate = new Date(`Dec 10, ${year - 1}`);
+  // let endDate = new Date(`Dec 7, ${year}`);
   // console.log(`Start Date: ${startDate}`);
 
   let nextDate = new Date(startDate);
@@ -16,37 +16,54 @@ function arrayOfDates(year, numMonths) {
   // Starting date is Dec 8 of the previous year
   // User inputs the current year and number of 'months' desired
 
+  //push both arrays onto this array, and return THIS
+  let bothPayPeriods = [];
 
-  let datesArray = [];
+  // REMOVE vvvv
+  // let datesArray = [];
+  
 
   for (i = 0; i < numMonths; i++) {
     // currentMonth = nextDate.getMonth();
-    let singleMonth = {};
-    nextMonth = new Date(nextDate);
+    let singleMonth = {};  //delete?
 
+    //assigns ths variable with the end date of the first pay period in ea. month
+    const firstDueDate = new Date(nextDate);
+    firstDueDate.setDate(firstDueDay);
+
+    nextMonth = new Date(nextDate);
     nextMonth.setMonth(nextMonth.getMonth()+1);
 
-    datesArray.push({
-      name: `${monthIndex[nextDate.getMonth()]}-${monthIndex[nextMonth.getMonth()]}'${nextMonth.getFullYear().toString().slice(2,5)}`,  // e.g. Dec - Jan '19
-      dates: []
+    bothPayPeriods.push({
+      name: `${monthIndex[nextDate.getMonth()]}-${monthIndex[nextMonth.getMonth()]}'${nextMonth.getFullYear().toString().slice(2,5)}`,  // e.g. Dec-Jan'19
+      payPeriod1: [],
+      payPeriod2: []
     });
+
+    // datesArray.push({
+    //   name: `${monthIndex[nextDate.getMonth()]}-${monthIndex[nextMonth.getMonth()]}'${nextMonth.getFullYear().toString().slice(2,5)}`,  // e.g. Dec - Jan '19
+    //   dates: []
+    // });
     
 
-    // while the nextDate value is less than the 24th of the following month
-    // figure out how to properly specify the 24th of the next month
+    // while the nextDate value is less than the Xth of the following month
+    // figure out how to properly specify the Xth of the next month
     while (nextDate < nextMonth) {
       //get the next day
-
       let currentDate = new Date(nextDate.setDate(nextDate.getDate() + 1));  // without assigning this to a new date obj, the printing didn't work :/  - not sure why
-      // console.log(nextDate.toDateString());
-      datesArray[i].dates.push(currentDate.toDateString());
+      
+      if (currentDate < firstDueDate) {
+        bothPayPeriods[i].payPeriod1.push(currentDate.toDateString());
+      } else if (currentDate >= firstDueDate) {
+        bothPayPeriods[i].payPeriod2.push(currentDate.toDateString());
+      }
       
     }
     
 
   }
-
-  return datesArray;
+  // console.log(bothPayPeriods);
+  return bothPayPeriods;
 
 }
 
