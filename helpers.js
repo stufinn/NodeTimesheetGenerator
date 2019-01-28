@@ -82,6 +82,29 @@ const addSheet = (workbook, cW, bothPayPeriods) => {
   });
 };
 
+const addSheetTitles = (workbook, cW, bothPayPeriods) => {
+
+  let tableTitleStyle = workbook.createStyle({
+    alignment: {
+      horizontal: 'center'
+    },
+    font: {
+      bold: true
+    }
+  });
+  
+  function addTitle(titleRow, title) {
+    worksheet[cW].cell(titleRow, startingColumn, titleRow, startingColumn + categories.length - 1, true)
+    .string(`${title}`)
+    .style(tableTitleStyle);
+  }
+
+  addTitle(startingRow - 1, `First Semi-Monthly Pay Period`);
+  addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period` )
+}
+  
+  
+
 const addDates = (cW, bothPayPeriods) => {
 
   let payPeriod1 = bothPayPeriods[cW-1].payPeriod1;
@@ -343,10 +366,6 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
           .style(coreCellStyle)
           .style(centerStyle);
 
-
-
-
-
       }
     }
   }
@@ -394,11 +413,62 @@ function printAreaSet(cW) {
   worksheet[cW].setPrintArea(1,1,14,46);
 }
 
+function addNameSignatureDate(workbook, cW, bothPayPeriods) {
+  let targetLine1 = startingRow + bothPayPeriods[cW-1].payPeriod1.length;
+  let targetLine2 = targetLine1 + bothPayPeriods[cW-1].payPeriod2.length + tableGap - 1;
+
+  let signLineStyle = workbook.createStyle({
+    border: {
+      top: {
+        style: 'thin'
+      }
+    },
+    font: {
+      bold: true
+    }
+  });
+
+  //name line
+  function nameLine(targetLine) {
+    worksheet[cW].cell( (targetLine + 4), startingColumn)
+      .string('Name');
+      worksheet[cW].cell( (targetLine + 4), startingColumn, (targetLine + 4), startingColumn + 2, true)
+      .style(signLineStyle); //merged and formatted
+  }
+
+  function signatureLine(targetLine) {
+    worksheet[cW].cell( (targetLine + 4), (startingColumn + 4))
+    .string('Signature');
+    worksheet[cW].cell( (targetLine + 4), startingColumn + 4, (targetLine + 4), startingColumn + 4 + 3, true)
+      .style(signLineStyle); //merged and formatted
+  }
+
+  function dateLine(targetLine) {
+    worksheet[cW].cell( (targetLine + 4), (startingColumn + 9))
+    .string('Date');
+    worksheet[cW].cell( (targetLine + 4), startingColumn + 9, (targetLine + 4), startingColumn + 9 + 2, true)
+    .style(signLineStyle); //merged and formatted
+  }
+
+
+  //for sheet1
+  nameLine(targetLine1);
+  signatureLine(targetLine1);
+  dateLine(targetLine1);
+  //for sheet2
+  nameLine(targetLine2);
+  signatureLine(targetLine2);
+  dateLine(targetLine2);
+
+}
+
 module.exports = {
+  addSheetTitles,
   addStyles,
   addSheet,
   addDates,
   addCategories,
   addFormulas,
-  printAreaSet
+  printAreaSet,
+  addNameSignatureDate
 };

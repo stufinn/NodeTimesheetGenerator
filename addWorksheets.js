@@ -20,6 +20,9 @@ function createAllWorkSheets(workbook) {
 
     //add a worksheet
     helpers.addSheet(workbook, cW, bothPayPeriods);
+
+    //add Sheet titles
+    helpers.addSheetTitles(workbook, cW, bothPayPeriods);
     
     // //add dates to each sheet
     helpers.addDates(cW, bothPayPeriods);
@@ -34,6 +37,8 @@ function createAllWorkSheets(workbook) {
 
     //Set print area
     // helpers.printAreaSet(cW);
+
+    helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
 
 
   }
