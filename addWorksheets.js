@@ -7,7 +7,7 @@ const helpers = require('./helpers');
 
 let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
 let year = 2019;
-let numMonths = 12;
+let numMonths = 15;
 
 const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
 // console.log(datesArray);

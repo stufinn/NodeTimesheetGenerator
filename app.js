@@ -11,11 +11,6 @@ var wb = new xl.Workbook();
 addWorkSheets.createAllWorkSheets(wb);
 
 // Add date to file name
-// const monthNames = ["January", "February", "March", "April", "May", "June",
-//   "July", "August", "September", "October", "November", "December"
-// ];
-
-// const monthNumbers = ['01','02', '03', '04','05','06','07','08','09','10','11'];
 
 let currentDate = new Date();
 let customDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}_${currentDate.getHours()}-${currentDate.getMinutes()}-${currentDate.getSeconds()}`;
