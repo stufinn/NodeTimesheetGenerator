@@ -3,9 +3,9 @@ const xl = require('excel4node');
 
 // variables to assign where the top left hand corner of the table should occur
 const startingRow = 2;
-const startingColumn = 2;
+const startingColumn = 1;
 //start second table X rows below first
-const tableGap = 5;
+const tableGap = 8;
 
 let worksheet = [];
 
@@ -80,7 +80,7 @@ const addSheet = (workbook, cW, bothPayPeriods) => {
       // 'defaultColWidth': 20
     }
   });
-}
+};
 
 const addDates = (cW, bothPayPeriods) => {
 
@@ -102,9 +102,15 @@ const addDates = (cW, bothPayPeriods) => {
   }
 };
 
-const addCategories = (cW) => {
+const addCategories = (cW, bothPayPeriods) => {
+  let pP1 = bothPayPeriods[cW-1].payPeriod1;
+  let secondStaringRow = startingRow + pP1.length + tableGap - 1;
   for (let x = 0; x < categories.length; x++) {
+    // add categories to first table
     worksheet[cW].cell(startingRow, startingColumn + x)
+      .string(`${categories[x].name}`);
+    // add categories to second table
+     worksheet[cW].cell(secondStaringRow, startingColumn + x)
       .string(`${categories[x].name}`);
   } 
 };
@@ -163,6 +169,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   let pay_Per1 = bothPayPeriods[cW-1].payPeriod1;
   let pay_Per2 = bothPayPeriods[cW-1].payPeriod2;
+  let startingRow2 = startingRow + pay_Per1.length + tableGap - 1;
 
   // Define worksheet styles
   var titleStyle = workbook.createStyle({
@@ -258,10 +265,26 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     }
   });
 
+  var lightfill = workbook.createStyle({
+      fill: {
+        type: 'pattern',
+        patternType: 'solid',
+        fgColor: 'F2F2F2'
+    }
+  });
+
+  var darkfill = workbook.createStyle({
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: 'D9D9D9'
+    }
+  });
+
   // fill: {
   //   type: 'pattern',
   //   patternType: 'solid',
-  //   color: '#0000ff'
+  //   color: '#lightgray'
   // }
 
   //  -- end of define styles -- //
@@ -285,6 +308,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   for (let j = 0; j < categories.length; j++) {
     //style title row at top
     styleTitles(bothPayPeriods, cW, startingRow, startingColumn, j);
+    styleTitles(bothPayPeriods, cW, startingRow2, startingColumn, j)
 
     // style category-totals row for first table
     let catTotRow1 = startingRow + pay_Per1.length + 1;
@@ -303,9 +327,26 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     for (let k = 0; k < categories.length - 2; k++) {
       worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
       for (l = 0; l < dates.length; l++) {
+        
+        //Add light gray color to every other column
+        if (k % 2 == 0) {
+          worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+            .style(lightfill);
+        }
+        // if string in the date cell of the column includes "Sat" or "Sun", color the row 'darker' shade of light-gray
+        if (dates[l].includes("Sat") || dates[l].includes("Sun")) {
+          worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+            .style(darkfill);
+        }
+        //format cells
         worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
           .style(coreCellStyle)
           .style(centerStyle);
+
+
+
+
+
       }
     }
   }
@@ -348,10 +389,16 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
 };
 
+
+function printAreaSet(cW) {
+  worksheet[cW].setPrintArea(1,1,14,46);
+}
+
 module.exports = {
   addStyles,
   addSheet,
   addDates,
   addCategories,
-  addFormulas
+  addFormulas,
+  printAreaSet
 };

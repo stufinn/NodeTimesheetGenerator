@@ -25,12 +25,15 @@ function createAllWorkSheets(workbook) {
     helpers.addDates(cW, bothPayPeriods);
 
     // //add top-row categories
-    helpers.addCategories(cW);
+    helpers.addCategories(cW, bothPayPeriods);
 
     helpers.addFormulas(cW, bothPayPeriods);
 
     // //add styles to sheet
     helpers.addStyles(workbook,cW, bothPayPeriods);
+
+    //Set print area
+    // helpers.printAreaSet(cW);
 
 
   }
