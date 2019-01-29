@@ -1,6 +1,6 @@
 # Node.js Timesheet Generator
 
-Creates a set of MS Excel timesheets. Uses Node.JS and the [excel4node module](https://www.npmjs.com/package/excel4node).
+Creates a set of MS Excel timesheets. Uses Node.JS and the [excel4node] module(https://www.npmjs.com/package/excel4node).
 
 This project was started with the objective of automating an exceedingly boring, time consuming and error-prone task (i.e. creating timesheets for each month of the year).
 
