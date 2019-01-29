@@ -6,7 +6,7 @@ const helpers = require('./helpers');
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
 let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
-let year = 2019;
+let year = 2020;
 let numMonths = 15;
 
 const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
