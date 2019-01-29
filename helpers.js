@@ -128,12 +128,19 @@ const addDates = (cW, bothPayPeriods) => {
     worksheet[cW].cell( (startingRow+1) + i, startingColumn)
       .string(`${payPeriod1[i]}`);
   }
+  //insert Total below dates (first table)
+  worksheet[cW].cell( (startingRow + payPeriod1.length + 1), startingColumn )
+    .string('Total');
 
-  //insert dates for second pay period below first table
+  //insert dates for second pay period
   for (let j = 0; j < payPeriod2.length; j++) {
     worksheet[cW].cell( startTable2 + j, startingColumn)
     .string(`${payPeriod2[j]}`);
   }
+  //insert Total below dates (second table)
+  worksheet[cW].cell( (startTable2 + payPeriod2.length), startingColumn )
+    .string('Total');
+
 };
 
 const addCategories = (cW, bothPayPeriods) => {
@@ -253,6 +260,12 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   var centerStyle = workbook.createStyle({
     alignment: {
       horizontal: 'center'
+    }
+  });
+
+  var rightStyle = workbook.createStyle({
+    alignment: {
+      horizontal: 'right'
     }
   });
 
@@ -398,6 +411,8 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
       .style(titleStyle)
       .style(dateStyle);
     }
+    worksheet[cW].cell( (initRow + numDates), startingColumn)
+      .style(rightStyle);
   }
 
   function styleDateTotalsColumn(cW, numDates, initRow, totColLoc) {
