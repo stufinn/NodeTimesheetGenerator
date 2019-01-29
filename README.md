@@ -12,4 +12,4 @@ To install and run this locally:
 
 FYI  - Beware that The app still needs work to clean up the code, and to allow for user inputs in order to determine the starting dates for the timesheets, number of months to create timesheets for etc.
 
-***Contributions welcome***
+***Contributions welcome!***
