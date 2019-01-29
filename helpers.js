@@ -271,6 +271,9 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     border: {
       top: {
         style: 'double'
+      },
+      left: {
+        style: 'dotted'
       }
     }
   });
@@ -400,7 +403,8 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   function styleDateTotalsColumn(cW, numDates, initRow, totColLoc) {
     for (let p = 0; p < numDates; p++) {
       worksheet[cW].cell(initRow + p, totColLoc)
-        .style(daysTotalStyle);
+        .style(daysTotalStyle)
+        .style(centerStyle);
     }
   }
 
