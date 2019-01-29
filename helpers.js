@@ -78,8 +78,8 @@ const addSheet = (workbook, cW, bothPayPeriods) => {
   var options = {
     'headerFooter': {
       // 'firstHeader': 'This is the header',
-      'evenHeader': 'Shibogama First Nations Council Semi Monthly Timesheet',
-      'oddHeader': 'Shibogama First Nations Council Semi Monthly Timesheet'
+      'evenHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet',
+      'oddHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet'
     },
     pageSetup: {
       'fitToHeight': 1,
@@ -492,7 +492,7 @@ function addNameSignatureDate(workbook, cW, bothPayPeriods) {
   //supervisor sign-off line
   function supervisorLine(targetLine) {
     worksheet[cW].cell( (targetLine + 7), startingColumn + 8)
-      .string("Supervisor approval");
+      .string("Supervisor's approval");
     worksheet[cW].cell( (targetLine + 7), startingColumn + 8, (targetLine + 7), (startingColumn + 8 + 3), true)
       .style(signLineStyle);  //merged and formatted
   }
