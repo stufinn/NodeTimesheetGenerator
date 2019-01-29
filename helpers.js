@@ -113,8 +113,6 @@ const addSheetTitles = (workbook, cW, bothPayPeriods) => {
   addTitle(startingRow - 1, `First Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})`);
   addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
-  
-  
 
 const addDates = (cW, bothPayPeriods) => {
 
@@ -448,11 +446,6 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
 };
 
-
-function printAreaSet(cW) {
-  worksheet[cW].setPrintArea(1,1,14,46);
-}
-
 function addNameSignatureDate(workbook, cW, bothPayPeriods) {
   let targetLine1 = startingRow + bothPayPeriods[cW-1].payPeriod1.length;
   let targetLine2 = targetLine1 + bothPayPeriods[cW-1].payPeriod2.length + tableGap - 1;
@@ -518,6 +511,5 @@ module.exports = {
   addDates,
   addCategories,
   addFormulas,
-  printAreaSet,
   addNameSignatureDate
 };

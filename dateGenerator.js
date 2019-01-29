@@ -45,10 +45,9 @@ function arrayOfDates(year, numMonths, firstDueDay) {
       } else if (currentDate >= firstDueDate) {
         bothPayPeriods[i].payPeriod2.push(currentDate.toDateString());
       }
-      
+  
     }
     
-
   }
   
   return bothPayPeriods;

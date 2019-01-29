@@ -35,11 +35,7 @@ function createAllWorkSheets(workbook) {
     // //add styles to sheet
     helpers.addStyles(workbook,cW, bothPayPeriods);
 
-    //Set print area
-    // helpers.printAreaSet(cW);
-
     helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
-
 
   }
 }
