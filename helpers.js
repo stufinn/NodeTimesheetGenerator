@@ -5,7 +5,7 @@ const xl = require('excel4node');
 const startingRow = 2;
 const startingColumn = 1;
 //start second table X rows below first
-const tableGap = 9;
+const tableGap = 11;
 
 let worksheet = [];
 
@@ -269,6 +269,14 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     }
   });
 
+  var noLeftBorder = workbook.createStyle({
+    border: {
+      left: {
+        style: 'none'
+      }
+    }
+  });
+
   var blueFillStyle = workbook.createStyle({
     fill: {
       type: 'pattern',
@@ -411,8 +419,10 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
       .style(titleStyle)
       .style(dateStyle);
     }
+    //style bottom "total" title
     worksheet[cW].cell( (initRow + numDates), startingColumn)
-      .style(rightStyle);
+      .style(rightStyle)
+      .style(noLeftBorder);
   }
 
   function styleDateTotalsColumn(cW, numDates, initRow, totColLoc) {
@@ -461,23 +471,30 @@ function addNameSignatureDate(workbook, cW, bothPayPeriods) {
   //name line
   function nameLine(targetLine) {
     worksheet[cW].cell( (targetLine + 4), startingColumn)
-      .string('Name');
+      .string('Employee name');
       worksheet[cW].cell( (targetLine + 4), startingColumn, (targetLine + 4), startingColumn + 2, true)
       .style(signLineStyle); //merged and formatted
   }
-
+  //signature line
   function signatureLine(targetLine) {
     worksheet[cW].cell( (targetLine + 4), (startingColumn + 4))
-    .string('Signature');
+    .string('Employee signature');
     worksheet[cW].cell( (targetLine + 4), startingColumn + 4, (targetLine + 4), startingColumn + 4 + 3, true)
       .style(signLineStyle); //merged and formatted
   }
-
+  //date line
   function dateLine(targetLine) {
     worksheet[cW].cell( (targetLine + 4), (startingColumn + 9))
     .string('Date');
     worksheet[cW].cell( (targetLine + 4), startingColumn + 9, (targetLine + 4), startingColumn + 9 + 2, true)
     .style(signLineStyle); //merged and formatted
+  }
+  //supervisor sign-off line
+  function supervisorLine(targetLine) {
+    worksheet[cW].cell( (targetLine + 7), startingColumn + 8)
+      .string("Supervisor approval");
+    worksheet[cW].cell( (targetLine + 7), startingColumn + 8, (targetLine + 7), (startingColumn + 8 + 3), true)
+      .style(signLineStyle);  //merged and formatted
   }
 
 
@@ -485,10 +502,12 @@ function addNameSignatureDate(workbook, cW, bothPayPeriods) {
   nameLine(targetLine1);
   signatureLine(targetLine1);
   dateLine(targetLine1);
+  supervisorLine(targetLine1);
   //for sheet2
   nameLine(targetLine2);
   signatureLine(targetLine2);
   dateLine(targetLine2);
+  supervisorLine(targetLine2);
 
 }
 
