@@ -16,6 +16,9 @@ function createAllWorkSheets(workbook) {
 
   //for each of the worksheets (i.e. numSheets), do the following:
   // cW ==> current Worksheet
+
+  helpers.addEntrySheet(workbook);
+
   for (let cW = 1; cW < numMonths + 1; cW++) {
 
     //add a worksheet

@@ -73,23 +73,29 @@ const categories = [
   }
 ];
 
+var worksheetOptions = {
+  'headerFooter': {
+    // 'firstHeader': 'This is the header',
+    'evenHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet',
+    'oddHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet'
+  },
+  pageSetup: {
+    'fitToHeight': 1,
+    'fitToWidth': 1
+  }
+}
+
+const addEntrySheet = (workbook) => {
+
+  workbook.addWorksheet(`Start Here`, worksheetOptions);
+
+};
+
+
+
 const addSheet = (workbook, cW, bothPayPeriods) => {
 
-  var options = {
-    'headerFooter': {
-      // 'firstHeader': 'This is the header',
-      'evenHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet',
-      'oddHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet'
-    },
-    pageSetup: {
-      'fitToHeight': 1,
-      'fitToWidth': 1
-    }
-    
-  }
-
-
-  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, options);
+  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, worksheetOptions);
 };
 
 const addSheetTitles = (workbook, cW, bothPayPeriods) => {
@@ -511,5 +517,6 @@ module.exports = {
   addDates,
   addCategories,
   addFormulas,
-  addNameSignatureDate
+  addNameSignatureDate,
+  addEntrySheet
 };
