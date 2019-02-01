@@ -10,11 +10,7 @@ const tableGap = 11;
 let worksheet = [];
 
 const categories = [
-  {
-    name: 'Date',
-    short: 'Date',
-    type: 'autoGen'
-  },
+
   {
     name: 'Regular',
     short: 'Regular',
@@ -47,29 +43,29 @@ const categories = [
     type: 'userEntered'
   },
   {
-  name: '',
+  name: '[custom1]',
   short: '[custom1]',
   type: 'userEntered'
   },
   {
-    name: '',
+    name: '[custom2]',
     short: '[custom2]',
     type: 'userEntered'
   },
   {
-    name: '',
+    name: '[custom3]',
     short: '[custom3]',
     type: 'userEntered'
   },
   {
-    name: '',
+    name: '[custom4]',
     short: '[custom4]',
     type: 'userEntered'
   }, 
   {
-    name: 'Total',
-    short: 'Total',
-    type: 'autoGen'
+    name: '[custom5]',
+    short: '[custom5]',
+    type: 'userEntered'
   }
 ];
 
@@ -85,12 +81,28 @@ var worksheetOptions = {
   }
 }
 
+// ADD and style "entry" sheet
+
 const addEntrySheet = (workbook) => {
 
-  workbook.addWorksheet(`Start Here`, worksheetOptions);
+  //assign the first worksheet this variable name
+  var entrySheet = workbook.addWorksheet(`Start Here`, worksheetOptions);
+
+  addCategToEntry(entrySheet);
 
 };
 
+const addCategToEntry = (entrySheet) => {
+  entrySheet.cell(1,2)
+    .string('Timesheet Categories');
+
+  for (let x = 1; x < categories.length; x++) {
+    //add categories to the entry sheet
+    // don't include the first and last entries (i.e. date and total 'categories')
+      entrySheet.cell(x + 1, 2)
+      .string(`${categories[x-1].name}`);
+  }
+}
 
 
 const addSheet = (workbook, cW, bothPayPeriods) => {
@@ -149,13 +161,25 @@ const addDates = (cW, bothPayPeriods) => {
 
 const addCategories = (cW, bothPayPeriods) => {
   let pP1 = bothPayPeriods[cW-1].payPeriod1;
-  let secondStaringRow = startingRow + pP1.length + tableGap - 1;
+  let secondStartingRow = startingRow + pP1.length + tableGap - 1;
+  //add 'date' title
+  worksheet[cW].cell(startingRow, startingColumn)
+    .string('Date');
+  worksheet[cW].cell(secondStartingRow, startingColumn)
+  .string('Date');
+//add "total" title
+  worksheet[cW].cell(startingRow, startingColumn + categories.length + 1)
+  .string('Total');
+  worksheet[cW].cell(secondStartingRow, startingColumn + categories.length + 1)
+  .string('Total');
+
+
   for (let x = 0; x < categories.length; x++) {
     // add categories to first table
-    worksheet[cW].cell(startingRow, startingColumn + x)
+    worksheet[cW].cell(startingRow, startingColumn + 1 + x)
       .string(`${categories[x].name}`);
     // add categories to second table
-     worksheet[cW].cell(secondStaringRow, startingColumn + x)
+     worksheet[cW].cell(secondStartingRow, startingColumn + 1 + x)
       .string(`${categories[x].name}`);
   } 
 };
@@ -165,7 +189,7 @@ const addFormulas = (cW, bothPayPeriods) => {
   let payPer1 = bothPayPeriods[cW-1].payPeriod1;
   let payPer2 = bothPayPeriods[cW-1].payPeriod2;
 
-  let daysTotalsCol = startingColumn + categories.length - 1;
+  let daysTotalsCol = startingColumn + categories.length + 1;
   let startRow1 = startingRow + 1;
   let startRow2 = startingRow + payPer1.length + tableGap; //check value
 
@@ -180,7 +204,7 @@ const addFormulas = (cW, bothPayPeriods) => {
    
   function categoryTotals(cW, startCatRow, startCol, categTotRow, numCategories){
   
-    for (let n = 0; n < numCategories; n++) {
+    for (let n = 0; n < numCategories + 2; n++) {
       let firstCategTotCell = xl.getExcelCellRef(startCatRow + 1, startCol + n);
       let lastCategTotCell = xl.getExcelCellRef(categTotRow - 1, startCol + n);
       worksheet[cW].cell(categTotRow, startCol + n)
@@ -367,7 +391,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   }
 
   // ----  Add title styles and Category Total Styles ------ //
-  for (let j = 0; j < categories.length; j++) {
+  for (let j = 0; j < categories.length + 2; j++) {
     //style title row at top
     styleTitles(bothPayPeriods, cW, startingRow, startingColumn, j);
     styleTitles(bothPayPeriods, cW, startingRow2, startingColumn, j)
@@ -386,7 +410,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   // ----- Add Core Cell Styling ---- //
 
   function styleCoreCells(bothPayPeriods, cW, dates, coreRowStart) {
-    for (let k = 0; k < categories.length - 2; k++) {
+    for (let k = 0; k < categories.length; k++) {
       worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
       for (l = 0; l < dates.length; l++) {
         
@@ -439,7 +463,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   let initRow1 = startingRow + 1;
   let initRow2 = startingRow + pay_Per1.length + tableGap;
-  let totColLoc = startingColumn + categories.length - 1;
+  let totColLoc = startingColumn + categories.length + 1;
   let numDates1 = pay_Per1.length;
   let numDates2 = pay_Per2.length;
 
