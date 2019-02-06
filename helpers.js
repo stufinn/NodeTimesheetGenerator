@@ -92,11 +92,16 @@ const addEntrySheet = (workbook) => {
 
 };
 
+//Add the categories to the entry sheet
+// Parameter => the entry sheet itself
+
 const addCategToEntry = (entrySheet) => {
   entrySheet.cell(1,2)
     .string('Timesheet Categories');
+  
+  console.log(categories);
 
-  for (let x = 1; x < categories.length; x++) {
+  for (let x = 1; x <= categories.length; x++) {
     //add categories to the entry sheet
     // don't include the first and last entries (i.e. date and total 'categories')
       entrySheet.cell(x + 1, 2)
