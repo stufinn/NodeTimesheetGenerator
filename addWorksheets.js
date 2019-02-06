@@ -9,6 +9,31 @@ let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay 
 let year = 2020;
 let numMonths = 15;
 
+const payDates = [
+  'March 15',
+  'March 29',
+  'April 15',
+  'April 30',
+  'May 15',
+  'May 30',
+  'June 14',
+  'June 28',
+  'July 15',
+  'July 30',
+  'Aug 15',
+  'Aug 30',
+  'Sep 13',
+  'Sep 30',
+  'Oct 15',
+  'Oct 30',
+  'Nov 15',
+  'Nov 29',
+  'Dec 13',
+  'Dec 30',
+];
+
+const numSheets = payDates.length;
+
 const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
 // console.log(datesArray);
 
