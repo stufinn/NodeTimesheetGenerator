@@ -98,8 +98,6 @@ const addEntrySheet = (workbook) => {
 const addCategToEntry = (entrySheet) => {
   entrySheet.cell(1,2)
     .string('Timesheet Categories');
-  
-  console.log(categories);
 
   for (let x = 1; x <= categories.length; x++) {
     //add categories to the entry sheet
@@ -115,6 +113,7 @@ const addSheet = (workbook, cW, bothPayPeriods) => {
   worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, worksheetOptions);
 };
 
+// Add the title above each of the charts
 const addSheetTitles = (workbook, cW, bothPayPeriods) => {
 
   let tableTitleStyle = workbook.createStyle({
@@ -164,7 +163,11 @@ const addDates = (cW, bothPayPeriods) => {
 
 };
 
+
+//Add the pay categories to the tables
+
 const addCategories = (cW, bothPayPeriods) => {
+
   let pP1 = bothPayPeriods[cW-1].payPeriod1;
   let secondStartingRow = startingRow + pP1.length + tableGap - 1;
   //add 'date' title
@@ -179,14 +182,20 @@ const addCategories = (cW, bothPayPeriods) => {
   .string('Total');
 
 
+  let startList = 2;
+
   for (let x = 0; x < categories.length; x++) {
+    
     // add categories to first table
     worksheet[cW].cell(startingRow, startingColumn + 1 + x)
-      .string(`${categories[x].name}`);
+      .formula(`='Start Here'!B${startList}`);
     // add categories to second table
      worksheet[cW].cell(secondStartingRow, startingColumn + 1 + x)
-      .string(`${categories[x].name}`);
-  } 
+      .formula(`='Start Here'!B${startList}`);
+    
+    startList += 1;
+  }  
+      
 };
 
 const addFormulas = (cW, bothPayPeriods) => {
