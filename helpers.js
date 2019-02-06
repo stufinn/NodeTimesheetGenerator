@@ -389,9 +389,10 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   //  -- end of define styles -- //
 
-  // ----- Add styling to titles row AND bottom totals row --- //
+  // ----- Add styling to Categories row AND bottom totals row --- //
 
-  function styleTitles(bothPayPeriods, cW, firstRow, firstCol, j) {
+  function styleCategories(bothPayPeriods, cW, firstRow, firstCol, j) {
+    worksheet[cW].row(firstRow).setHeight(50);
     worksheet[cW].cell(firstRow, firstCol + j)
     .style(titleStyle)
     .style(centerStyle)
@@ -407,8 +408,8 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   // ----  Add title styles and Category Total Styles ------ //
   for (let j = 0; j < categories.length + 2; j++) {
     //style title row at top
-    styleTitles(bothPayPeriods, cW, startingRow, startingColumn, j);
-    styleTitles(bothPayPeriods, cW, startingRow2, startingColumn, j)
+    styleCategories(bothPayPeriods, cW, startingRow, startingColumn, j);
+    styleCategories(bothPayPeriods, cW, startingRow2, startingColumn, j)
 
     // style category-totals row for first table
     let catTotRow1 = startingRow + pay_Per1.length + 1;
