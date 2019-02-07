@@ -1,4 +1,4 @@
-function arrayOfDates(year, numSheets, firstDueDay, payDates) {
+function arrayOfDates(year, numSheets, payDates) {
 
   let startDate = new Date(`Jan 11, ${year}`);
   // console.log(`Start Date: ${startDate}`);
@@ -49,33 +49,5 @@ function arrayOfDates(year, numSheets, firstDueDay, payDates) {
 
  
 }
-
-// arrayOfDates(2019,24,26,[
-//   'Jan 30',
-//   'Feb 15',
-//   'Feb 28',
-//   'March 15',
-//   'March 29',
-//   'April 15',
-//   'April 30',
-//   'May 15',
-//   'May 30',
-//   'June 14',
-//   'June 28',
-//   'July 15',
-//   'July 30',
-//   'Aug 15',
-//   'Aug 30',
-//   'Sep 13',
-//   'Sep 30',
-//   'Oct 15',
-//   'Oct 30',
-//   'Nov 15',
-//   'Nov 29',
-//   'Dec 13',
-//   'Dec 30',
-//   'Jan 15'
-// ]);
-
 
 module.exports = {arrayOfDates};

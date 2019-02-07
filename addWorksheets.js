@@ -5,9 +5,9 @@ const helpers = require('./helpers');
 // These are the categories of time that employees can log
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
-let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
+// let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
 let year = 2019;
-let numMonths = 12;
+// let numMonths = 12;
 
 const payDates = [
   'Jan 30',
@@ -33,14 +33,14 @@ const payDates = [
   'Nov 29',
   'Dec 13',
   'Dec 30',
-  'Jan 15'
+  // 'Jan 15'
 ];
 
 const numSheets = payDates.length;
 
-const payPeriods = dateGen.arrayOfDates(year, numSheets, firstDueDay, payDates);
+const payPeriods = dateGen.arrayOfDates(year, numSheets, payDates);
 // console.log(datesArray);
-console.log(payPeriods);
+// console.log(payPeriods);
 
 function createAllWorkSheets(workbook) {
 
@@ -58,7 +58,7 @@ function createAllWorkSheets(workbook) {
     helpers.addSheetTitles(workbook, cW, payDates);
     
     // // //add dates to each sheet
-    // helpers.addDates(cW, bothPayPeriods);
+    helpers.addDates(cW, payPeriods);
 
     // // //add top-row categories
     // helpers.addCategories(cW, bothPayPeriods);

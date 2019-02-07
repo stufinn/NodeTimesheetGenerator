@@ -136,30 +136,37 @@ const addSheetTitles = (workbook, cW, payDates) => {
   // addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
 
-const addDates = (cW, bothPayPeriods) => {
+const addDates = (cW, payDates) => {
 
-  let payPeriod1 = bothPayPeriods[cW-1].payPeriod1;
-  let payPeriod2 = bothPayPeriods[cW-1].payPeriod2;
+  // console.log(payDates);
+
+  let dates = payDates[cW-1].dates;
+  // console.log(dates);
+
+
+
+  // let payPeriod1 = bothPayPeriods[cW-1].payPeriod1;
+  // let payPeriod2 = bothPayPeriods[cW-1].payPeriod2;
   //start second table X rows below first
-  let startTable2 = startingRow + payPeriod1.length + tableGap;
+  // let startTable2 = startingRow + payPeriod1.length + tableGap;
 
   //insert dates for first pay period
-  for (let i = 0; i < payPeriod1.length; i++) {
+  for (let i = 0; i < dates.length; i++) {
     worksheet[cW].cell( (startingRow+1) + i, startingColumn)
-      .string(`${payPeriod1[i]}`);
+      .string(`${dates[i]}`);
   }
   //insert Total below dates (first table)
-  worksheet[cW].cell( (startingRow + payPeriod1.length + 1), startingColumn )
+  worksheet[cW].cell( (startingRow + dates.length + 1), startingColumn )
     .string('Total');
 
   //insert dates for second pay period
-  for (let j = 0; j < payPeriod2.length; j++) {
-    worksheet[cW].cell( startTable2 + j, startingColumn)
-    .string(`${payPeriod2[j]}`);
-  }
+  // for (let j = 0; j < payPeriod2.length; j++) {
+  //   worksheet[cW].cell( startTable2 + j, startingColumn)
+  //   .string(`${payPeriod2[j]}`);
+  // }
   //insert Total below dates (second table)
-  worksheet[cW].cell( (startTable2 + payPeriod2.length), startingColumn )
-    .string('Total');
+  // worksheet[cW].cell( (startTable2 + payPeriod2.length), startingColumn )
+  //   .string('Total');
 
 };
 
