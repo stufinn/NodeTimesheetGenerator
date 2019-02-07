@@ -224,11 +224,11 @@ const addFormulas = (cW, payPeriods) => {
 
 // ------------ ADD STYLES --------------
 
-const addStyles = (workbook,cW, bothPayPeriods) => {
+const addStyles = (workbook,cW, payPeriods) => {
 
-  let pay_Per1 = bothPayPeriods[cW-1].payPeriod1;
-  let pay_Per2 = bothPayPeriods[cW-1].payPeriod2;
-  let startingRow2 = startingRow + pay_Per1.length + tableGap - 1;
+  let payPeriod = payPeriods[cW-1].dates;
+  // let pay_Per2 = bothPayPeriods[cW-1].payPeriod2;
+  // let startingRow2 = startingRow + payPeriod.length + tableGap - 1;
 
   // Define worksheet styles
   var titleStyle = workbook.createStyle({
@@ -367,7 +367,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   // ----- Add styling to Categories row AND bottom totals row --- //
 
-  function styleCategories(bothPayPeriods, cW, firstRow, firstCol, j) {
+  function styleCategories(cW, firstRow, firstCol, j) {
     worksheet[cW].row(firstRow).setHeight(50);
     worksheet[cW].cell(firstRow, firstCol + j)
     .style(titleStyle)
@@ -375,7 +375,7 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     .style(categoryStyle);
   }
 
-  function styleCategoryTots(bothPayPeriods, cw, catTotRow, catTotStartCol, j) {
+  function styleCategoryTots(cw, catTotRow, catTotStartCol, j) {
     worksheet[cW].cell(catTotRow, catTotStartCol + j)
     .style(bottomTotalsStyle)
     .style(centerStyle);
@@ -384,23 +384,23 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
   // ----  Add title styles and Category Total Styles ------ //
   for (let j = 0; j < categories.length + 2; j++) {
     //style title row at top
-    styleCategories(bothPayPeriods, cW, startingRow, startingColumn, j);
-    styleCategories(bothPayPeriods, cW, startingRow2, startingColumn, j)
+    styleCategories(cW, startingRow, startingColumn, j);
+    // styleCategories(bothPayPeriods, cW, startingRow2, startingColumn, j)
 
     // style category-totals row for first table
-    let catTotRow1 = startingRow + pay_Per1.length + 1;
-    styleCategoryTots(bothPayPeriods, cW, catTotRow1, startingColumn, j );
+    let catTotRow1 = startingRow + payPeriod.length + 1;
+    styleCategoryTots(cW, catTotRow1, startingColumn, j );
    
     // style category-totals row for second table
-    let catTotRow2 = catTotRow1 + pay_Per2.length + tableGap - 1;
-    styleCategoryTots(bothPayPeriods, cW, catTotRow2, startingColumn, j );
+    // let catTotRow2 = catTotRow1 + pay_Per2.length + tableGap - 1;
+    // styleCategoryTots(bothPayPeriods, cW, catTotRow2, startingColumn, j );
 
   }
 
 
   // ----- Add Core Cell Styling ---- //
 
-  function styleCoreCells(bothPayPeriods, cW, dates, coreRowStart) {
+  function styleCoreCells(cW, dates, coreRowStart) {
     for (let k = 0; k < categories.length; k++) {
       worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
       for (l = 0; l < dates.length; l++) {
@@ -426,9 +426,9 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
 
   let coreRowStart1 = startingRow + 1;
   //add styling to core cells for first table
-  styleCoreCells(bothPayPeriods, cW, pay_Per1, startingRow + 1);
+  styleCoreCells(cW, payPeriod, startingRow + 1);
   //add styling to core cells for first table
-  styleCoreCells(bothPayPeriods, cW, pay_Per2, startingRow + pay_Per1.length + tableGap);
+  // styleCoreCells(cW, pay_Per2, startingRow + payPeriod.length + tableGap);
 
     //add Styling to dates column AND dates total column
 
@@ -452,19 +452,19 @@ const addStyles = (workbook,cW, bothPayPeriods) => {
     }
   }
 
-  let initRow1 = startingRow + 1;
-  let initRow2 = startingRow + pay_Per1.length + tableGap;
+  let initRow = startingRow + 1;
+  // let initRow2 = startingRow + payPeriod.length + tableGap;
   let totColLoc = startingColumn + categories.length + 1;
-  let numDates1 = pay_Per1.length;
-  let numDates2 = pay_Per2.length;
+  let numDates = payPeriod.length;
+  // let numDates2 = pay_Per2.length;
 
   worksheet[cW].column(startingColumn).setWidth(18); //keep this here
   // Style dates and dates-total columns for first table
-  styleDatesColumn(cW, numDates1, initRow1);
-  styleDateTotalsColumn(cW, numDates1, initRow1, totColLoc);
+  styleDatesColumn(cW, numDates, initRow);
+  styleDateTotalsColumn(cW, numDates, initRow, totColLoc);
   // Style dates and dates-total columns for second table
-  styleDatesColumn(cW, numDates2, initRow2);
-  styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
+  // styleDatesColumn(cW, numDates2, initRow2);
+  // styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
 };
 
 function addNameSignatureDate(workbook, cW, bothPayPeriods) {

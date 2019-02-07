@@ -67,7 +67,7 @@ function createAllWorkSheets(workbook) {
     helpers.addFormulas(cW, payPeriods);
 
     // // //add styles to sheet
-    // helpers.addStyles(workbook,cW, bothPayPeriods);
+    helpers.addStyles(workbook,cW, payPeriods);
 
     // helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
 
