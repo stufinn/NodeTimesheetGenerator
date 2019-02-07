@@ -181,14 +181,13 @@ const addCategories = (cW, bothPayPeriods) => {
 
 //Add formulas to the tables
 
-const addFormulas = (cW, bothPayPeriods) => {
+const addFormulas = (cW, payPeriods) => {
   // Total (per day)
-  let payPer1 = bothPayPeriods[cW-1].payPeriod1;
-  let payPer2 = bothPayPeriods[cW-1].payPeriod2;
+  let payPeriod = payPeriods[cW-1].dates;
 
   let daysTotalsCol = startingColumn + categories.length + 1;
-  let startRow1 = startingRow + 1;
-  let startRow2 = startingRow + payPer1.length + tableGap; //check value
+  let startRow = startingRow + 1;
+  // let startRow2 = startingRow + payPer1.length + tableGap; //check value
 
   function dateTotals(cW, startRow, daysTotalsCol, numCells) {
     for (let m = 0; m < numCells; m++) {
@@ -209,27 +208,21 @@ const addFormulas = (cW, bothPayPeriods) => {
     }
   }
 
-
-  // Add totals for first table
-  dateTotals(cW, startRow1, daysTotalsCol, payPer1.length);
-
-  // Add totals for second table
-  dateTotals(cW, startRow2, daysTotalsCol, payPer2.length);
+  // Add totals
+  dateTotals(cW, startRow, daysTotalsCol, payPeriod.length);
 
   // Total (per category)
   let startCategoryTotCol = startingColumn + 1;
-  let startCatRow1 = startingRow;
-  let startCatRow2 = startCatRow1 + payPer1.length + tableGap - 1;
-  let categTotRow1 = startingRow + payPer1.length + 1;
-  let categTotRow2 = categTotRow1 + payPer2.length + tableGap - 1;
+  let startCatRow = startingRow;
+  let categTotRow = startingRow + payPeriod.length + 1;
   let numOfCategories = categories.length - 1; //don't include 'totals' category
 
-  // Add category totals for first table
-  categoryTotals(cW, startCatRow1, startCategoryTotCol, categTotRow1, numOfCategories);
-  // Add category totals for second table
-  categoryTotals(cW, startCatRow2 ,startCategoryTotCol, categTotRow2, numOfCategories);
+  // Add category totals
+  categoryTotals(cW, startCatRow, startCategoryTotCol, categTotRow, numOfCategories);
 
 };
+
+// ------------ ADD STYLES --------------
 
 const addStyles = (workbook,cW, bothPayPeriods) => {
 

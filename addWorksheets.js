@@ -63,7 +63,8 @@ function createAllWorkSheets(workbook) {
     // // //add top-row categories
     helpers.addCategories(cW, payPeriods);
 
-    // helpers.addFormulas(cW, bothPayPeriods);
+    // Add formulas
+    helpers.addFormulas(cW, payPeriods);
 
     // // //add styles to sheet
     // helpers.addStyles(workbook,cW, bothPayPeriods);
