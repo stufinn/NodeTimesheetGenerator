@@ -19,14 +19,13 @@ function arrayOfDates(year, numMonths, firstDueDay) {
 
   for (i = 0; i < numMonths; i++) {
     // currentMonth = nextDate.getMonth();
-    let singleMonth = {};  //delete?
 
     //assigns ths variable with the end date of the first pay period in ea. month
     const firstDueDate = new Date(nextDate);
-    firstDueDate.setDate(firstDueDay);
+    firstDueDate.setDate(firstDueDay); // sets the day of the month e.g. Jan _26_
 
-    nextMonth = new Date(nextDate);
-    nextMonth.setMonth(nextMonth.getMonth()+1);
+    nextMonth = new Date(nextDate); //e.g. Jan 10, 2019
+    nextMonth.setMonth(nextMonth.getMonth()+1); // eg. Feb 10, 2019
 
     bothPayPeriods.push({
       name: `${monthIndex[nextDate.getMonth()]}-${monthIndex[nextMonth.getMonth()]}'${nextMonth.getFullYear().toString().slice(2,5)}`,  // e.g. Dec-Jan'19
