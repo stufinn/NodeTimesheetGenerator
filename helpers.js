@@ -127,7 +127,7 @@ const addSheetTitles = (workbook, cW, payDates) => {
   });
   
   function addTitle(titleRow, title) {
-    worksheet[cW].cell(titleRow, startingColumn, titleRow, startingColumn + categories.length - 1, true)
+    worksheet[cW].cell(titleRow, startingColumn, titleRow, startingColumn + categories.length + 1, true)
     .string(`${title}`)
     .style(tableTitleStyle);
   }
