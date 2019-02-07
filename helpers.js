@@ -43,27 +43,51 @@ const categories = [
     type: 'userEntered'
   },
   {
-  name: '[custom1]',
+  name: '[custom]',
   short: '[custom1]',
   type: 'userEntered'
   },
   {
-    name: '[custom2]',
+    name: '[custom]',
     short: '[custom2]',
     type: 'userEntered'
   },
   {
-    name: '[custom3]',
+    name: '[custom]',
     short: '[custom3]',
     type: 'userEntered'
   },
   {
-    name: '[custom4]',
+    name: '[custom]',
     short: '[custom4]',
     type: 'userEntered'
   }, 
   {
-    name: '[custom5]',
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
+  },
+  {
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
+  },
+  {
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
+  },{
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
+  },
+  {
+    name: '[custom]',
+    short: '[custom]',
+    type: 'userEntered'
+  },
+  {
+    name: '[custom]',
     short: '[custom5]',
     type: 'userEntered'
   }
@@ -77,7 +101,12 @@ var worksheetOptions = {
   },
   pageSetup: {
     'fitToHeight': 1,
-    'fitToWidth': 1
+    'fitToWidth': 1,
+    'orientation': 'landscape',
+  },
+  printOptions: {
+    'centerHorizontal': true,
+    'centerVertical': true,
   }
 }
 
