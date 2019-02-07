@@ -157,36 +157,29 @@ const addDates = (cW, payDates) => {
 
 const addCategories = (cW, bothPayPeriods) => {
 
-  
-  // let pP1 = bothPayPeriods[cW-1].payPeriod1;
-  // let secondStartingRow = startingRow + pP1.length + tableGap - 1;
   //add 'date' title
   worksheet[cW].cell(startingRow, startingColumn)
     .string('Date');
-  // worksheet[cW].cell(secondStartingRow, startingColumn)
-  // .string('Date');
+
 //add "total" title
   worksheet[cW].cell(startingRow, startingColumn + categories.length + 1)
   .string('Total');
-  // worksheet[cW].cell(secondStartingRow, startingColumn + categories.length + 1)
-  // .string('Total');
-
 
   let startList = 2;
 
   for (let x = 0; x < categories.length; x++) {
     
-    // add categories to first table
+    // add categories 
     worksheet[cW].cell(startingRow, startingColumn + 1 + x)
       .formula(`='Start Here'!B${startList}`);
-    // add categories to second table
-    //  worksheet[cW].cell(secondStartingRow, startingColumn + 1 + x)
-    //   .formula(`='Start Here'!B${startList}`);
     
     startList += 1;
   }  
       
 };
+
+
+//Add formulas to the tables
 
 const addFormulas = (cW, bothPayPeriods) => {
   // Total (per day)
