@@ -61,7 +61,7 @@ function createAllWorkSheets(workbook) {
     helpers.addDates(cW, payPeriods);
 
     // // //add top-row categories
-    // helpers.addCategories(cW, bothPayPeriods);
+    helpers.addCategories(cW, payPeriods);
 
     // helpers.addFormulas(cW, bothPayPeriods);
 

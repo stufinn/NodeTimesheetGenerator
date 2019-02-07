@@ -136,57 +136,40 @@ const addSheetTitles = (workbook, cW, payDates) => {
   // addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
 
+// Add dates to tables
+
 const addDates = (cW, payDates) => {
 
-  // console.log(payDates);
-
   let dates = payDates[cW-1].dates;
-  // console.log(dates);
 
-
-
-  // let payPeriod1 = bothPayPeriods[cW-1].payPeriod1;
-  // let payPeriod2 = bothPayPeriods[cW-1].payPeriod2;
-  //start second table X rows below first
-  // let startTable2 = startingRow + payPeriod1.length + tableGap;
-
-  //insert dates for first pay period
+  //insert dates 
   for (let i = 0; i < dates.length; i++) {
     worksheet[cW].cell( (startingRow+1) + i, startingColumn)
       .string(`${dates[i]}`);
   }
-  //insert Total below dates (first table)
+  //insert Total below dates
   worksheet[cW].cell( (startingRow + dates.length + 1), startingColumn )
     .string('Total');
-
-  //insert dates for second pay period
-  // for (let j = 0; j < payPeriod2.length; j++) {
-  //   worksheet[cW].cell( startTable2 + j, startingColumn)
-  //   .string(`${payPeriod2[j]}`);
-  // }
-  //insert Total below dates (second table)
-  // worksheet[cW].cell( (startTable2 + payPeriod2.length), startingColumn )
-  //   .string('Total');
-
 };
 
 
-//Add the pay categories to the tables
+//Add the categories to the tables
 
 const addCategories = (cW, bothPayPeriods) => {
 
-  let pP1 = bothPayPeriods[cW-1].payPeriod1;
-  let secondStartingRow = startingRow + pP1.length + tableGap - 1;
+  
+  // let pP1 = bothPayPeriods[cW-1].payPeriod1;
+  // let secondStartingRow = startingRow + pP1.length + tableGap - 1;
   //add 'date' title
   worksheet[cW].cell(startingRow, startingColumn)
     .string('Date');
-  worksheet[cW].cell(secondStartingRow, startingColumn)
-  .string('Date');
+  // worksheet[cW].cell(secondStartingRow, startingColumn)
+  // .string('Date');
 //add "total" title
   worksheet[cW].cell(startingRow, startingColumn + categories.length + 1)
   .string('Total');
-  worksheet[cW].cell(secondStartingRow, startingColumn + categories.length + 1)
-  .string('Total');
+  // worksheet[cW].cell(secondStartingRow, startingColumn + categories.length + 1)
+  // .string('Total');
 
 
   let startList = 2;
@@ -197,8 +180,8 @@ const addCategories = (cW, bothPayPeriods) => {
     worksheet[cW].cell(startingRow, startingColumn + 1 + x)
       .formula(`='Start Here'!B${startList}`);
     // add categories to second table
-     worksheet[cW].cell(secondStartingRow, startingColumn + 1 + x)
-      .formula(`='Start Here'!B${startList}`);
+    //  worksheet[cW].cell(secondStartingRow, startingColumn + 1 + x)
+    //   .formula(`='Start Here'!B${startList}`);
     
     startList += 1;
   }  
