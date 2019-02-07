@@ -40,6 +40,7 @@ const numSheets = payDates.length;
 
 const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
 // console.log(datesArray);
+console.log(bothPayPeriods);
 
 function createAllWorkSheets(workbook) {
 
@@ -54,7 +55,7 @@ function createAllWorkSheets(workbook) {
     helpers.addSheet(workbook, cW, payDates);
 
     //add Sheet titles
-    // helpers.addSheetTitles(workbook, cW, bothPayPeriods);
+    helpers.addSheetTitles(workbook, cW, payDates);
     
     // // //add dates to each sheet
     // helpers.addDates(cW, bothPayPeriods);

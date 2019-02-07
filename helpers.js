@@ -114,7 +114,7 @@ const addSheet = (workbook, cW, payDates) => {
 };
 
 // Add the title above each of the charts
-const addSheetTitles = (workbook, cW, bothPayPeriods) => {
+const addSheetTitles = (workbook, cW, payDates) => {
 
   let tableTitleStyle = workbook.createStyle({
     alignment: {
@@ -132,8 +132,8 @@ const addSheetTitles = (workbook, cW, bothPayPeriods) => {
     .style(tableTitleStyle);
   }
 
-  addTitle(startingRow - 1, `First Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})`);
-  addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
+  addTitle(startingRow - 1, `Pay Date: ${payDates[cW-1]}`);
+  // addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
 
 const addDates = (cW, bothPayPeriods) => {
