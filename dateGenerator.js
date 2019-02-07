@@ -1,56 +1,81 @@
-function arrayOfDates(year, numMonths, firstDueDay) {
+function arrayOfDates(year, numSheets, firstDueDay, payDates) {
 
-  // let year = 2019;
-  // let numMonths = 2;
-  let startDate = new Date(`Jan 10, ${year}`);
-  // let endDate = new Date(`Dec 7, ${year}`);
+  let startDate = new Date(`Jan 11, ${year}`);
   // console.log(`Start Date: ${startDate}`);
 
   let nextDate = new Date(startDate);
 
-  monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let payPeriods = [];
 
-  // For each of the 'months', starting with months[0], add in consecutive dates.
-  // Starting date is ${startDate} of the previous year
-  // User inputs the current year and number of 'months' desired
+  let monthDay = nextDate.getDate();
 
-  //push both arrays onto this array, and return THIS
-  let bothPayPeriods = [];
 
-  for (i = 0; i < numMonths; i++) {
-    // currentMonth = nextDate.getMonth();
+  for (let j = 0; j < numSheets; j++) { 
+    let dateCutoff;
 
-    //assigns ths variable with the end date of the first pay period in ea. month
-    const firstDueDate = new Date(nextDate);
-    firstDueDate.setDate(firstDueDay); // sets the day of the month e.g. Jan _26_
+    // console.log(`Sheet ${j+1}`);
+    // payPeriods[j].dates.push(nextDate);
+    // console.log(payPeriods[j]);
 
-    nextMonth = new Date(nextDate); //e.g. Jan 10, 2019
-    nextMonth.setMonth(nextMonth.getMonth()+1); // eg. Feb 10, 2019
-
-    bothPayPeriods.push({
-      name: `${monthIndex[nextDate.getMonth()]}-${monthIndex[nextMonth.getMonth()]}'${nextMonth.getFullYear().toString().slice(2,5)}`,  // e.g. Dec-Jan'19
-      payPeriod1: [],
-      payPeriod2: []
-    });
-
-    // while the nextDate value is less than the Xth of the following month
-    // figure out how to properly specify the Xth of the next month
-    while (nextDate < nextMonth) {
-      //get the next day
-      let currentDate = new Date(nextDate.setDate(nextDate.getDate() + 1));  // without assigning this to a new date obj, the printing didn't work :/  - not sure why
-      
-      if (currentDate < firstDueDate) {
-        bothPayPeriods[i].payPeriod1.push(currentDate.toDateString());
-      } else if (currentDate >= firstDueDate) {
-        bothPayPeriods[i].payPeriod2.push(currentDate.toDateString());
+  
+    payPeriods.push(
+      {
+        payDate: `${payDates[j]}`,
+        dates: [],
       }
-  
-    }
-    
-  }
-  
-  return bothPayPeriods;
+    );
 
+    function addToDateArray(dateCutoff) {
+      while (monthDay != dateCutoff) {
+        // console.log(nextDate);
+        payPeriods[j].dates.push(nextDate.toDateString());
+        nextDate.setDate(nextDate.getDate() + 1);
+        monthDay = nextDate.getDate();
+      }  
+    }
+
+    if (monthDay >= 26 || monthDay <= 10) {
+      dateCutoff = 11;
+      addToDateArray(dateCutoff);
+    } else if (monthDay >=11 || monthDay <= 25) {
+      dateCutoff = 26;
+      addToDateArray(dateCutoff);
+    }
+
+  }
+
+  // console.log(payPeriods);
+  return payPeriods;
+
+ 
 }
+
+// arrayOfDates(2019,24,26,[
+//   'Jan 30',
+//   'Feb 15',
+//   'Feb 28',
+//   'March 15',
+//   'March 29',
+//   'April 15',
+//   'April 30',
+//   'May 15',
+//   'May 30',
+//   'June 14',
+//   'June 28',
+//   'July 15',
+//   'July 30',
+//   'Aug 15',
+//   'Aug 30',
+//   'Sep 13',
+//   'Sep 30',
+//   'Oct 15',
+//   'Oct 30',
+//   'Nov 15',
+//   'Nov 29',
+//   'Dec 13',
+//   'Dec 30',
+//   'Jan 15'
+// ]);
+
 
 module.exports = {arrayOfDates};

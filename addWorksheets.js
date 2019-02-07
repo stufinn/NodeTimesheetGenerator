@@ -10,7 +10,6 @@ let year = 2019;
 let numMonths = 12;
 
 const payDates = [
-  'Jan 15',
   'Jan 30',
   'Feb 15',
   'Feb 28',
@@ -34,13 +33,14 @@ const payDates = [
   'Nov 29',
   'Dec 13',
   'Dec 30',
+  'Jan 15'
 ];
 
 const numSheets = payDates.length;
 
-const bothPayPeriods = dateGen.arrayOfDates(year, numMonths, firstDueDay);
+const payPeriods = dateGen.arrayOfDates(year, numSheets, firstDueDay, payDates);
 // console.log(datesArray);
-console.log(bothPayPeriods);
+console.log(payPeriods);
 
 function createAllWorkSheets(workbook) {
 
