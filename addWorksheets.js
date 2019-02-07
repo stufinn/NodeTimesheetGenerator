@@ -69,7 +69,7 @@ function createAllWorkSheets(workbook) {
     // // //add styles to sheet
     helpers.addStyles(workbook,cW, payPeriods);
 
-    // helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
+    helpers.addNameSignatureDate(workbook, cW, payPeriods);
 
   }
 }

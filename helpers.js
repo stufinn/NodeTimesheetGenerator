@@ -467,9 +467,9 @@ const addStyles = (workbook,cW, payPeriods) => {
   // styleDateTotalsColumn(cW, numDates2, initRow2, totColLoc);
 };
 
-function addNameSignatureDate(workbook, cW, bothPayPeriods) {
-  let targetLine1 = startingRow + bothPayPeriods[cW-1].payPeriod1.length;
-  let targetLine2 = targetLine1 + bothPayPeriods[cW-1].payPeriod2.length + tableGap - 1;
+function addNameSignatureDate(workbook, cW, payPeriods) {
+  let targetLine = startingRow + payPeriods[cW-1].dates.length;
+  // let targetLine2 = targetLine + bothPayPeriods[cW-1].payPeriod2.length + tableGap - 1;
 
   let signLineStyle = workbook.createStyle({
     border: {
@@ -513,15 +513,15 @@ function addNameSignatureDate(workbook, cW, bothPayPeriods) {
 
 
   //for sheet1
-  nameLine(targetLine1);
-  signatureLine(targetLine1);
-  dateLine(targetLine1);
-  supervisorLine(targetLine1);
+  nameLine(targetLine);
+  signatureLine(targetLine);
+  dateLine(targetLine);
+  supervisorLine(targetLine);
   //for sheet2
-  nameLine(targetLine2);
-  signatureLine(targetLine2);
-  dateLine(targetLine2);
-  supervisorLine(targetLine2);
+  // nameLine(targetLine2);
+  // signatureLine(targetLine2);
+  // dateLine(targetLine2);
+  // supervisorLine(targetLine2);
 
 }
 
