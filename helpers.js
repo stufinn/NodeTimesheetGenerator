@@ -108,9 +108,9 @@ const addCategToEntry = (entrySheet) => {
 }
 
 
-const addSheet = (workbook, cW, bothPayPeriods) => {
+const addSheet = (workbook, cW, payDates) => {
 
-  worksheet[cW] = workbook.addWorksheet(`${bothPayPeriods[cW-1].name}`, worksheetOptions);
+  worksheet[cW] = workbook.addWorksheet(`${payDates[cW-1]}`, worksheetOptions);
 };
 
 // Add the title above each of the charts

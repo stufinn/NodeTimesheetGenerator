@@ -2,7 +2,7 @@ function arrayOfDates(year, numMonths, firstDueDay) {
 
   // let year = 2019;
   // let numMonths = 2;
-  let startDate = new Date(`Jan 10, ${year - 1}`);
+  let startDate = new Date(`Jan 10, ${year}`);
   // let endDate = new Date(`Dec 7, ${year}`);
   // console.log(`Start Date: ${startDate}`);
 

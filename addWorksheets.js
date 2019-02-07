@@ -6,10 +6,14 @@ const helpers = require('./helpers');
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
 let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
-let year = 2020;
-let numMonths = 15;
+let year = 2019;
+let numMonths = 12;
 
 const payDates = [
+  'Jan 15',
+  'Jan 30',
+  'Feb 15',
+  'Feb 28',
   'March 15',
   'March 29',
   'April 15',
@@ -44,26 +48,26 @@ function createAllWorkSheets(workbook) {
 
   helpers.addEntrySheet(workbook);
 
-  for (let cW = 1; cW < numMonths + 1; cW++) {
+  for (let cW = 1; cW < numSheets + 1; cW++) {
 
     //add a worksheet
-    helpers.addSheet(workbook, cW, bothPayPeriods);
+    helpers.addSheet(workbook, cW, payDates);
 
     //add Sheet titles
-    helpers.addSheetTitles(workbook, cW, bothPayPeriods);
+    // helpers.addSheetTitles(workbook, cW, bothPayPeriods);
     
-    // //add dates to each sheet
-    helpers.addDates(cW, bothPayPeriods);
+    // // //add dates to each sheet
+    // helpers.addDates(cW, bothPayPeriods);
 
-    // //add top-row categories
-    helpers.addCategories(cW, bothPayPeriods);
+    // // //add top-row categories
+    // helpers.addCategories(cW, bothPayPeriods);
 
-    helpers.addFormulas(cW, bothPayPeriods);
+    // helpers.addFormulas(cW, bothPayPeriods);
 
-    // //add styles to sheet
-    helpers.addStyles(workbook,cW, bothPayPeriods);
+    // // //add styles to sheet
+    // helpers.addStyles(workbook,cW, bothPayPeriods);
 
-    helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
+    // helpers.addNameSignatureDate(workbook, cW, bothPayPeriods);
 
   }
 }
