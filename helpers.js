@@ -33,12 +33,12 @@ const categories = [
     type: 'userEntered'
   },
   {
-    name: 'Banked',
+    name: 'Bank Used',
     short: 'Bank',
     type: 'userEntered'
   },
   {
-    name: 'Stat',
+    name: 'Stat Holiday',
     short: 'Stat',
     type: 'userEntered'
   },
@@ -397,7 +397,7 @@ const addStyles = (workbook,cW, payPeriods) => {
   // ----- Add styling to Categories row AND bottom totals row --- //
 
   function styleCategories(cW, firstRow, firstCol, j) {
-    worksheet[cW].row(firstRow).setHeight(50);
+    worksheet[cW].row(firstRow).setHeight(60);
     worksheet[cW].cell(firstRow, firstCol + j)
     .style(titleStyle)
     .style(centerStyle)
