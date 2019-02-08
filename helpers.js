@@ -521,22 +521,30 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   //signature line
   function signatureLine(targetLine) {
     worksheet[cW].cell( (targetLine + 4), (startingColumn + 4))
-    .string('Employee signature');
-    worksheet[cW].cell( (targetLine + 4), startingColumn + 4, (targetLine + 4), startingColumn + 4 + 3, true)
+    .string('Employee Signature');
+    worksheet[cW].cell( (targetLine + 4), startingColumn + 4, (targetLine + 4), startingColumn + 4 + 5, true)
       .style(signLineStyle); //merged and formatted
   }
   //date line
   function dateLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 4), (startingColumn + 9))
+    worksheet[cW].cell( (targetLine + 4), (startingColumn + 11))
     .string('Date');
-    worksheet[cW].cell( (targetLine + 4), startingColumn + 9, (targetLine + 4), startingColumn + 9 + 2, true)
+    worksheet[cW].cell( (targetLine + 4), startingColumn + 11, (targetLine + 4), startingColumn + 11 + 3, true)
     .style(signLineStyle); //merged and formatted
   }
   //supervisor sign-off line
   function supervisorLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 7), startingColumn + 8)
-      .string("Supervisor's approval");
-    worksheet[cW].cell( (targetLine + 7), startingColumn + 8, (targetLine + 7), (startingColumn + 8 + 3), true)
+    worksheet[cW].cell( (targetLine + 7), startingColumn + 4)
+      .string("SFNC Senior Manager Signature");
+    worksheet[cW].cell( (targetLine + 7), startingColumn + 4, (targetLine + 7), (startingColumn + 4 + 5), true)
+      .style(signLineStyle);  //merged and formatted
+  }
+
+  //supervisor sign-off line
+  function sfncManager(targetLine) {
+    worksheet[cW].cell( (targetLine + 7), startingColumn)
+      .string("Supervisor Signature");
+    worksheet[cW].cell( (targetLine + 7), startingColumn, (targetLine + 7), (startingColumn + 2), true)
       .style(signLineStyle);  //merged and formatted
   }
 
@@ -546,6 +554,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   signatureLine(targetLine);
   dateLine(targetLine);
   supervisorLine(targetLine);
+  sfncManager(targetLine);
   //for sheet2
   // nameLine(targetLine2);
   // signatureLine(targetLine2);
