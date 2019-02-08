@@ -10,29 +10,98 @@ let year = 2019;
 // let numMonths = 12;
 
 const payDates = [
-  'Jan 30',
-  'Feb 15',
-  'Feb 28',
-  'March 15',
-  'March 29',
-  'April 15',
-  'April 30',
-  'May 15',
-  'May 30',
-  'June 14',
-  'June 28',
-  'July 15',
-  'July 30',
-  'Aug 15',
-  'Aug 30',
-  'Sep 13',
-  'Sep 30',
-  'Oct 15',
-  'Oct 30',
-  'Nov 15',
-  'Nov 29',
-  'Dec 13',
-  'Dec 30',
+  {
+    full: 'January 30, 2019',
+    short: 'Jan 30',
+  },
+  {
+    full: 'February 15, 2019',
+    short: 'Feb 15'
+  },
+  {
+    full: 'Februart 28, 2019',
+    short: 'Feb 28'
+  },
+  {
+    full: 'March 15, 2019',
+    short: 'March 15'
+  },
+  {
+    full:'March 29, 2019',
+    short: 'March 29',
+  },
+  {
+    full: 'April 15, 2019',
+    short: 'April 15',
+  },
+  {
+    full: 'April 30, 2019',
+    short: 'April 30',
+  },
+  {
+    full: 'May 15, 2019',
+    short: 'May 15',
+  },
+  {
+    full: 'May 30, 2019',
+    short: 'May 30',
+  },
+  {
+    full: 'June 14, 2019',
+    short: 'June 14',
+  },
+  {
+    full: 'June 28, 2019',
+    short: 'June 28',
+  },
+  {
+    full: 'July 15, 2019',
+    short: 'July 15',
+  },
+  {
+    full: 'July 30, 2019',
+    short: 'July 30',
+  },
+  {
+    full: 'August 15, 2019',
+    short: 'Aug 15',
+  },
+  {
+    full: 'August 30, 2019',
+    short: 'Aug 30',
+  },
+  {
+    full: 'September 13, 2019',
+    short: 'Sep 13',
+  },
+  {
+    full: 'September 30, 2019',
+    short: 'Sep 30',
+  },
+  {
+    full: 'October 15, 2019',
+    short: 'Oct 15',
+  },
+  {
+    full: 'October 30, 2019',
+    short: 'Oct 30',
+  },
+  {
+    full: 'November 15, 2019',
+    short: 'Nov 15',
+  },
+  {
+    full: 'November 29, 2019',
+    short: 'Nov 29',
+  },
+  {
+    full: 'December 13, 2019',
+    short: 'Dec 13',
+  },
+  {
+    full: 'December 30, 2019',
+    short: 'Dec 30',
+  }
   // 'Jan 15'
 ];
 
