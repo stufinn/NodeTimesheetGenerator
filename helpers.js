@@ -179,12 +179,9 @@ const addCategToEntry = (entrySheet, workbook) => {
   entrySheet.cell(3,1)
     .string('Employee Name:')
     .style(boldText);
-
-  // entrySheet.cell(2,2)
-  //   .string('[Enter name in "Start Here" sheet]');
   
   entrySheet.cell(3,2,3,4,true)
-    .string('[Enter name in "Start Here" sheet]')
+    .string('[Enter in "Start Here" sheet]')
     .style(highlighted2);
 
 
@@ -200,7 +197,7 @@ const addCategToEntry = (entrySheet, workbook) => {
       .style(thinBorders);
   }
   entrySheet.column(1).setWidth(20);
-  entrySheet.column(4).setWidth(15);
+  // entrySheet.column(4).setWidth(15);
   entrySheet.column(3).setWidth(5);
   //add conditional formatting to highlight certain cells
   entrySheet.addConditionalFormattingRule('A1:A50', {

@@ -11,18 +11,6 @@ let year = 2019;
 
 const payDates = [
   {
-    full: 'January 30, 2019',
-    short: 'Jan 30',
-  },
-  {
-    full: 'February 15, 2019',
-    short: 'Feb 15'
-  },
-  {
-    full: 'February 28, 2019',
-    short: 'Feb 28'
-  },
-  {
     full: 'March 15, 2019',
     short: 'March 15'
   },

@@ -1,6 +1,6 @@
 function arrayOfDates(year, numSheets, payDates) {
 
-  let startDate = new Date(`Jan 11, ${year}`);
+  let startDate = new Date(`Feb 26, ${year}`);
   // console.log(`Start Date: ${startDate}`);
 
   let nextDate = new Date(startDate);
