@@ -117,23 +117,154 @@ const addEntrySheet = (workbook) => {
   //assign the first worksheet this variable name
   var entrySheet = workbook.addWorksheet(`Start Here`, worksheetOptions);
 
-  addCategToEntry(entrySheet);
+  addCategToEntry(entrySheet, workbook);
 
 };
 
 //Add the categories to the entry sheet
 // Parameter => the entry sheet itself
 
-const addCategToEntry = (entrySheet) => {
-  entrySheet.cell(1,2)
-    .string('Timesheet Categories');
+const addCategToEntry = (entrySheet, workbook) => {
+
+  let thinBorders = workbook.createStyle({
+    border: {
+      top: {
+        style: 'thin'
+      },
+      right: {
+        style: 'thin'
+      },
+      bottom: {
+        style: 'thin'
+      },
+      left: {
+        style: 'thin'
+      }
+    }
+  });
+
+  let boldText = workbook.createStyle({
+    font: {
+      bold: true,
+    },
+  });
+
+  let highlighted = workbook.createStyle({
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      bgColor: '#fefe56',
+    }
+  });
+
+  let highlighted2 = workbook.createStyle({
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#fefe56',
+    }
+  });
+
+  let mainTitle = workbook.createStyle({
+    font: {
+      size: 20,
+      bold: true,
+    }
+  });
+
+  entrySheet.cell(1,1)
+    .string('Shibogama First Nations Council Timesheet Template')
+    .style(mainTitle);
+
+  entrySheet.cell(3,1)
+    .string('Employee Name:')
+    .style(boldText);
+
+  // entrySheet.cell(2,2)
+  //   .string('[Enter name in "Start Here" sheet]');
+  
+  entrySheet.cell(3,2,3,4,true)
+    .string('[Enter name in "Start Here" sheet]')
+    .style(highlighted2);
+
+
+  entrySheet.cell(6,1)
+    .string('Timesheet Categories')
+    .style(boldText);
 
   for (let x = 1; x <= categories.length; x++) {
     //add categories to the entry sheet
     // don't include the first and last entries (i.e. date and total 'categories')
-      entrySheet.cell(x + 1, 2)
-      .string(`${categories[x-1].name}`);
+      entrySheet.cell(x + 6, 1)
+      .string(`${categories[x-1].name}`)
+      .style(thinBorders);
   }
+  entrySheet.column(1).setWidth(20);
+  entrySheet.column(4).setWidth(15);
+  entrySheet.column(3).setWidth(5);
+  //add conditional formatting to highlight certain cells
+  entrySheet.addConditionalFormattingRule('A1:A50', {
+    type: 'expression',
+    priority: 1,
+    formula: 'NOT(ISERROR(SEARCH("[custom]", A1)))',
+    style: highlighted,
+  });
+
+  entrySheet.cell(7,3)
+    .string('Instructions')
+    .style(boldText);
+
+  entrySheet.cell(8,4)
+  .string('Fill in the highlighted cells on this "Intro" worksheet.');
+
+  entrySheet.cell(9,4)
+  .string('These will automatically fill the rest of the worksheet.');
+
+  entrySheet.cell(11,3)
+  .string('Adding columns to timesheets')
+  .style(boldText);
+
+  entrySheet.cell(12,4)
+  .string('If you add extra columns to a timesheet, please ensure');
+
+  entrySheet.cell(13,4)
+  .string('that the totals formulas are correct in the new columns.');
+
+  entrySheet.cell(14,4)
+  .string('The best way to do this is to copy existing columns then ');
+
+  entrySheet.cell(15,4)
+  .string('right-click and select "insert copied cells".');
+
+  entrySheet.cell(17,3)
+  .string('Submitting timesheets')
+  .style(boldText);
+
+  entrySheet.cell(18,4)
+  .string('On the final day of each *reporting* period, the timesheet.');
+
+  entrySheet.cell(19,4)
+  .string('should be printed, signed and submitted to your supervisor');
+
+  entrySheet.cell(20,4)
+  .string('for approval.  For example, the timesheet for the January 30th,');
+
+  entrySheet.cell(21,4)
+  .string('2019 pay date should be submitted by Friday January 25th.');
+
+  entrySheet.cell(23,3)
+  .string('Saving files')
+  .style(boldText);
+
+  entrySheet.cell(24,4)
+  .string('Timesheet files should be saved on the server to ensure ');
+
+  entrySheet.cell(25,4)
+  .string('information is backed up. Bi-monthy timesheets should be');
+
+  entrySheet.cell(26,4)
+  .string('printed and kept on file.');
+
 }
 
 
@@ -194,13 +325,13 @@ const addCategories = (cW, bothPayPeriods) => {
   worksheet[cW].cell(startingRow, startingColumn + categories.length + 1)
   .string('Total');
 
-  let startList = 2;
+  let startList = 7;
 
   for (let x = 0; x < categories.length; x++) {
     
     // add categories 
     worksheet[cW].cell(startingRow, startingColumn + 1 + x)
-      .formula(`='Start Here'!B${startList}`);
+      .formula(`='Start Here'!A${startList}`);
     
     startList += 1;
   }  
@@ -511,8 +642,19 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
     }
   });
 
+  let nameText = workbook.createStyle({
+    font: {
+      size: 15,
+    }
+  });
+
   //name line
   function nameLine(targetLine) {
+
+    worksheet[cW].cell( (targetLine + 4), startingColumn)
+    .formula(`='Start Here'!B3`)
+    .style(nameText);
+
     worksheet[cW].cell( (targetLine + 5), startingColumn)
       .string('Employee Name (Printed)');
       worksheet[cW].cell( (targetLine + 5), startingColumn, (targetLine + 5), startingColumn + 2, true)
