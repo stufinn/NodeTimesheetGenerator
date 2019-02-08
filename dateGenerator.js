@@ -20,7 +20,7 @@ function arrayOfDates(year, numSheets, payDates) {
   
     payPeriods.push(
       {
-        payDate: `${payDates[j]}`,
+        payDate: `${payDates[j].short}`,
         dates: [],
       }
     );

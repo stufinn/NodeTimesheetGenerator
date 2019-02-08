@@ -19,7 +19,7 @@ const payDates = [
     short: 'Feb 15'
   },
   {
-    full: 'Februart 28, 2019',
+    full: 'February 28, 2019',
     short: 'Feb 28'
   },
   {

@@ -139,7 +139,7 @@ const addCategToEntry = (entrySheet) => {
 
 const addSheet = (workbook, cW, payDates) => {
 
-  worksheet[cW] = workbook.addWorksheet(`${payDates[cW-1]}`, worksheetOptions);
+  worksheet[cW] = workbook.addWorksheet(`${payDates[cW-1].short}`, worksheetOptions);
 };
 
 // Add the title above each of the charts
@@ -161,7 +161,7 @@ const addSheetTitles = (workbook, cW, payDates) => {
     .style(tableTitleStyle);
   }
 
-  addTitle(startingRow - 1, `Pay Date: ${payDates[cW-1]}`);
+  addTitle(startingRow - 1, `Pay Date: ${payDates[cW-1].full}`);
   // addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
 }
 
