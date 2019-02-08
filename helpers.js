@@ -513,38 +513,38 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
 
   //name line
   function nameLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 4), startingColumn)
-      .string('Employee name');
-      worksheet[cW].cell( (targetLine + 4), startingColumn, (targetLine + 4), startingColumn + 2, true)
+    worksheet[cW].cell( (targetLine + 5), startingColumn)
+      .string('Employee Name (Printed)');
+      worksheet[cW].cell( (targetLine + 5), startingColumn, (targetLine + 5), startingColumn + 2, true)
       .style(signLineStyle); //merged and formatted
   }
   //signature line
   function signatureLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 4), (startingColumn + 4))
+    worksheet[cW].cell( (targetLine + 5), (startingColumn + 4))
     .string('Employee Signature');
-    worksheet[cW].cell( (targetLine + 4), startingColumn + 4, (targetLine + 4), startingColumn + 4 + 5, true)
+    worksheet[cW].cell( (targetLine + 5), startingColumn + 4, (targetLine + 5), startingColumn + 4 + 5, true)
       .style(signLineStyle); //merged and formatted
   }
   //date line
   function dateLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 4), (startingColumn + 11))
+    worksheet[cW].cell( (targetLine + 5), (startingColumn + 11))
     .string('Date');
-    worksheet[cW].cell( (targetLine + 4), startingColumn + 11, (targetLine + 4), startingColumn + 11 + 3, true)
+    worksheet[cW].cell( (targetLine + 5), startingColumn + 11, (targetLine + 5), startingColumn + 11 + 3, true)
     .style(signLineStyle); //merged and formatted
   }
   //supervisor sign-off line
   function supervisorLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 7), startingColumn + 4)
+    worksheet[cW].cell( (targetLine + 9), startingColumn + 4)
       .string("SFNC Senior Manager Signature");
-    worksheet[cW].cell( (targetLine + 7), startingColumn + 4, (targetLine + 7), (startingColumn + 4 + 5), true)
+    worksheet[cW].cell( (targetLine + 9), startingColumn + 4, (targetLine + 9), (startingColumn + 4 + 5), true)
       .style(signLineStyle);  //merged and formatted
   }
 
   //supervisor sign-off line
   function sfncManager(targetLine) {
-    worksheet[cW].cell( (targetLine + 7), startingColumn)
+    worksheet[cW].cell( (targetLine + 9), startingColumn)
       .string("Supervisor Signature");
-    worksheet[cW].cell( (targetLine + 7), startingColumn, (targetLine + 7), (startingColumn + 2), true)
+    worksheet[cW].cell( (targetLine + 9), startingColumn, (targetLine + 9), (startingColumn + 2), true)
       .style(signLineStyle);  //merged and formatted
   }
 
