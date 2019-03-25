@@ -1,4 +1,4 @@
-const xl = require('excel4node');
+const xl = require("excel4node");
 // const dateGen = require('./dateGenerator');
 
 // variables to assign where the top left hand corner of the table should occur
@@ -10,337 +10,355 @@ const tableGap = 11;
 let worksheet = [];
 
 const categories = [
-
   {
-    name: 'Regular',
-    short: 'Regular',
-    type: 'userEntered'
-
+    name: "Regular",
+    short: "Regular",
+    type: "userEntered"
   },
   {
-    name: 'Progr./Proj.',
-    short: 'ProgrProj',
-    type: 'userEntered'
+    name: "Progr./Proj.",
+    short: "ProgrProj",
+    type: "userEntered"
   },
   {
-    name: 'Sick',
-    short: 'Sick',
-    type: 'userEntered'
+    name: "Sick",
+    short: "Sick",
+    type: "userEntered"
   },
   {
-    name: 'Vacation',
-    short: 'Vacay',
-    type: 'userEntered'
+    name: "Vacation",
+    short: "Vacay",
+    type: "userEntered"
   },
   {
-    name: 'Bank Used',
-    short: 'Bank',
-    type: 'userEntered'
+    name: "Bank Used",
+    short: "Bank",
+    type: "userEntered"
   },
   {
-    name: 'Stat Holiday',
-    short: 'Stat',
-    type: 'userEntered'
+    name: "Stat Holiday",
+    short: "Stat",
+    type: "userEntered"
   },
   {
-  name: '[custom]',
-  short: '[custom1]',
-  type: 'userEntered'
+    name: "[custom]",
+    short: "[custom1]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom2]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom2]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom3]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom3]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom4]',
-    type: 'userEntered'
-  }, 
-  {
-    name: '[custom]',
-    short: '[custom5]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom4]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom5]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom5]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom5]',
-    type: 'userEntered'
-  },{
-    name: '[custom]',
-    short: '[custom5]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom5]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom5]",
+    type: "userEntered"
   },
   {
-    name: '[custom]',
-    short: '[custom5]',
-    type: 'userEntered'
+    name: "[custom]",
+    short: "[custom5]",
+    type: "userEntered"
+  },
+  {
+    name: "[custom]",
+    short: "[custom]",
+    type: "userEntered"
+  },
+  {
+    name: "[custom]",
+    short: "[custom5]",
+    type: "userEntered"
   }
 ];
 
 var worksheetOptions = {
-  'headerFooter': {
+  headerFooter: {
     // 'firstHeader': 'This is the header',
-    'evenHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet',
-    'oddHeader': '&20Shibogama First Nations Council Semi Monthly Timesheet'
+    evenHeader: "&20Shibogama First Nations Council Semi Monthly Timesheet",
+    oddHeader: "&20Shibogama First Nations Council Semi Monthly Timesheet"
   },
   pageSetup: {
-    'fitToHeight': 1,
-    'fitToWidth': 1,
-    'orientation': 'landscape',
+    fitToHeight: 1,
+    fitToWidth: 1,
+    orientation: "landscape"
   },
   printOptions: {
-    'centerHorizontal': true,
-    'centerVertical': true,
+    centerHorizontal: true,
+    centerVertical: true
   }
-}
+};
 
 // ADD and style "entry" sheet
 
-const addEntrySheet = (workbook) => {
-
+const addEntrySheet = workbook => {
   //assign the first worksheet this variable name
   var entrySheet = workbook.addWorksheet(`Start Here`, worksheetOptions);
 
   addCategToEntry(entrySheet, workbook);
-
 };
 
 //Add the categories to the entry sheet
 // Parameter => the entry sheet itself
 
 const addCategToEntry = (entrySheet, workbook) => {
-
   let thinBorders = workbook.createStyle({
     border: {
       top: {
-        style: 'thin'
+        style: "thin"
       },
       right: {
-        style: 'thin'
+        style: "thin"
       },
       bottom: {
-        style: 'thin'
+        style: "thin"
       },
       left: {
-        style: 'thin'
+        style: "thin"
       }
     }
   });
 
   let boldText = workbook.createStyle({
     font: {
-      bold: true,
-    },
+      bold: true
+    }
   });
 
   let highlighted = workbook.createStyle({
     fill: {
-      type: 'pattern',
-      patternType: 'solid',
-      bgColor: '#fefe56',
+      type: "pattern",
+      patternType: "solid",
+      bgColor: "#fefe56"
     }
   });
 
   let highlighted2 = workbook.createStyle({
     fill: {
-      type: 'pattern',
-      patternType: 'solid',
-      fgColor: '#fefe56',
+      type: "pattern",
+      patternType: "solid",
+      fgColor: "#fefe56"
     }
   });
 
   let mainTitle = workbook.createStyle({
     font: {
       size: 20,
-      bold: true,
+      bold: true
     }
   });
 
-  entrySheet.cell(1,1)
-    .string('Shibogama First Nations Council Timesheet Template')
+  entrySheet
+    .cell(1, 1)
+    .string("Shibogama First Nations Council Timesheet Template")
     .style(mainTitle);
 
-  entrySheet.cell(3,1)
-    .string('Employee Name:')
+  entrySheet
+    .cell(3, 1)
+    .string("Employee Name:")
     .style(boldText);
-  
-  entrySheet.cell(3,2,3,4,true)
+
+  entrySheet
+    .cell(3, 2, 3, 4, true)
     .string('[Enter in "Start Here" sheet]')
     .style(highlighted2);
 
-
-  entrySheet.cell(6,1)
-    .string('Timesheet Categories')
+  entrySheet
+    .cell(6, 1)
+    .string("Timesheet Categories")
     .style(boldText);
 
   for (let x = 1; x <= categories.length; x++) {
     //add categories to the entry sheet
     // don't include the first and last entries (i.e. date and total 'categories')
-      entrySheet.cell(x + 6, 1)
-      .string(`${categories[x-1].name}`)
+    entrySheet
+      .cell(x + 6, 1)
+      .string(`${categories[x - 1].name}`)
       .style(thinBorders);
   }
   entrySheet.column(1).setWidth(20);
   // entrySheet.column(4).setWidth(15);
   entrySheet.column(3).setWidth(5);
   //add conditional formatting to highlight certain cells
-  entrySheet.addConditionalFormattingRule('A1:A50', {
-    type: 'expression',
+  entrySheet.addConditionalFormattingRule("A1:A50", {
+    type: "expression",
     priority: 1,
     formula: 'NOT(ISERROR(SEARCH("[custom]", A1)))',
-    style: highlighted,
+    style: highlighted
   });
 
-  entrySheet.cell(7,3)
-    .string('Instructions')
+  entrySheet
+    .cell(7, 3)
+    .string("Instructions")
     .style(boldText);
 
-  entrySheet.cell(8,4)
-  .string('Fill in the highlighted cells on this "Intro" worksheet.');
+  entrySheet
+    .cell(8, 4)
+    .string('Fill in the highlighted cells on this "Intro" worksheet.');
 
-  entrySheet.cell(9,4)
-  .string('These will automatically fill the rest of the worksheet.');
+  entrySheet
+    .cell(9, 4)
+    .string("These will automatically fill the rest of the worksheet.");
 
-  entrySheet.cell(11,3)
-  .string('Adding columns to timesheets')
-  .style(boldText);
+  entrySheet
+    .cell(11, 3)
+    .string("Adding columns to timesheets")
+    .style(boldText);
 
-  entrySheet.cell(12,4)
-  .string('If you add extra columns to a timesheet, please ensure');
+  entrySheet
+    .cell(12, 4)
+    .string("If you add extra columns to a timesheet, please ensure");
 
-  entrySheet.cell(13,4)
-  .string('that the totals formulas are correct in the new columns.');
+  entrySheet
+    .cell(13, 4)
+    .string("that the totals formulas are correct in the new columns.");
 
-  entrySheet.cell(14,4)
-  .string('The best way to do this is to copy existing columns then ');
+  entrySheet
+    .cell(14, 4)
+    .string("The best way to do this is to copy existing columns then ");
 
-  entrySheet.cell(15,4)
-  .string('right-click and select "insert copied cells".');
+  entrySheet
+    .cell(15, 4)
+    .string('right-click and select "insert copied cells".');
 
-  entrySheet.cell(17,3)
-  .string('Submitting timesheets')
-  .style(boldText);
+  entrySheet
+    .cell(17, 3)
+    .string("Submitting timesheets")
+    .style(boldText);
 
-  entrySheet.cell(18,4)
-  .string('On the final day of each *reporting* period, the timesheet.');
+  entrySheet
+    .cell(18, 4)
+    .string("On the final day of each *reporting* period, the timesheet.");
 
-  entrySheet.cell(19,4)
-  .string('should be printed, signed and submitted to your supervisor');
+  entrySheet
+    .cell(19, 4)
+    .string("should be printed, signed and submitted to your supervisor");
 
-  entrySheet.cell(20,4)
-  .string('for approval.  For example, the timesheet for the January 30th,');
+  entrySheet
+    .cell(20, 4)
+    .string("for approval.  For example, the timesheet for the January 30th,");
 
-  entrySheet.cell(21,4)
-  .string('2019 pay date should be submitted by Friday January 25th.');
+  entrySheet
+    .cell(21, 4)
+    .string("2019 pay date should be submitted by Friday January 25th.");
 
-  entrySheet.cell(23,3)
-  .string('Saving files')
-  .style(boldText);
+  entrySheet
+    .cell(23, 3)
+    .string("Saving files")
+    .style(boldText);
 
-  entrySheet.cell(24,4)
-  .string('Timesheet files should be saved on the server to ensure ');
+  entrySheet
+    .cell(24, 4)
+    .string("Timesheet files should be saved on the server to ensure ");
 
-  entrySheet.cell(25,4)
-  .string('information is backed up. Bi-monthy timesheets should be');
+  entrySheet
+    .cell(25, 4)
+    .string("information is backed up. Bi-monthy timesheets should be");
 
-  entrySheet.cell(26,4)
-  .string('printed and kept on file.');
-
-}
-
+  entrySheet.cell(26, 4).string("printed and kept on file.");
+};
 
 const addSheet = (workbook, cW, payDates) => {
-
-  worksheet[cW] = workbook.addWorksheet(`${payDates[cW-1].short}`, worksheetOptions);
+  worksheet[cW] = workbook.addWorksheet(
+    `${payDates[cW - 1].short}`,
+    worksheetOptions
+  );
 };
 
 // Add the title above each of the charts
 const addSheetTitles = (workbook, cW, payDates) => {
-
   let tableTitleStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'center'
+      horizontal: "center"
     },
     font: {
       bold: true,
       size: 20
     }
   });
-  
+
   function addTitle(titleRow, title) {
-    worksheet[cW].cell(titleRow, startingColumn, titleRow, startingColumn + categories.length + 1, true)
-    .string(`${title}`)
-    .style(tableTitleStyle);
+    worksheet[cW]
+      .cell(
+        titleRow,
+        startingColumn,
+        titleRow,
+        startingColumn + categories.length + 1,
+        true
+      )
+      .string(`${title}`)
+      .style(tableTitleStyle);
   }
 
-  addTitle(startingRow - 1, `Pay Date: ${payDates[cW-1].full}`);
+  addTitle(startingRow - 1, `Pay Date: ${payDates[cW - 1].full}`);
   // addTitle(startingRow + bothPayPeriods[cW-1].payPeriod1.length + tableGap - 2, `Second Semi-Monthly Pay Period (${bothPayPeriods[cW-1].name})` )
-}
+};
 
 // Add dates to tables
 
 const addDates = (cW, payDates) => {
+  let dates = payDates[cW - 1].dates;
 
-  let dates = payDates[cW-1].dates;
-
-  //insert dates 
+  //insert dates
   for (let i = 0; i < dates.length; i++) {
-    worksheet[cW].cell( (startingRow+1) + i, startingColumn)
+    worksheet[cW]
+      .cell(startingRow + 1 + i, startingColumn)
       .string(`${dates[i]}`);
   }
   //insert Total below dates
-  worksheet[cW].cell( (startingRow + dates.length + 1), startingColumn )
-    .string('Total');
+  worksheet[cW]
+    .cell(startingRow + dates.length + 1, startingColumn)
+    .string("Total");
 };
-
 
 //Add the categories to the tables
 
 const addCategories = (cW, bothPayPeriods) => {
-
   //add 'date' title
-  worksheet[cW].cell(startingRow, startingColumn)
-    .string('Date');
+  worksheet[cW].cell(startingRow, startingColumn).string("Date");
 
-//add "total" title
-  worksheet[cW].cell(startingRow, startingColumn + categories.length + 1)
-  .string('Total');
+  //add "total" title
+  worksheet[cW]
+    .cell(startingRow, startingColumn + categories.length + 1)
+    .string("Total");
 
   let startList = 7;
 
   for (let x = 0; x < categories.length; x++) {
-    
-    // add categories 
-    worksheet[cW].cell(startingRow, startingColumn + 1 + x)
+    // add categories
+    worksheet[cW]
+      .cell(startingRow, startingColumn + 1 + x)
       .formula(`='Start Here'!A${startList}`);
-    
-    startList += 1;
-  }  
-      
-};
 
+    startList += 1;
+  }
+};
 
 //Add formulas to the tables
 
 const addFormulas = (cW, payPeriods) => {
   // Total (per day)
-  let payPeriod = payPeriods[cW-1].dates;
+  let payPeriod = payPeriods[cW - 1].dates;
 
   let daysTotalsCol = startingColumn + categories.length + 1;
   let startRow = startingRow + 1;
@@ -348,20 +366,30 @@ const addFormulas = (cW, payPeriods) => {
 
   function dateTotals(cW, startRow, daysTotalsCol, numCells) {
     for (let m = 0; m < numCells; m++) {
-      let firstDaysTotCell = xl.getExcelCellRef(startRow + m, startingColumn + 1 );
-      let lastDaysTotCell = xl.getExcelCellRef(startRow + m, daysTotalsCol - 1 );
-      worksheet[cW].cell(startRow + m, daysTotalsCol)
-      .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
+      let firstDaysTotCell = xl.getExcelCellRef(
+        startRow + m,
+        startingColumn + 1
+      );
+      let lastDaysTotCell = xl.getExcelCellRef(startRow + m, daysTotalsCol - 1);
+      worksheet[cW]
+        .cell(startRow + m, daysTotalsCol)
+        .formula(`SUM(${firstDaysTotCell}:${lastDaysTotCell})`);
     }
-   }
-   
-  function categoryTotals(cW, startCatRow, startCol, categTotRow, numCategories){
-  
+  }
+
+  function categoryTotals(
+    cW,
+    startCatRow,
+    startCol,
+    categTotRow,
+    numCategories
+  ) {
     for (let n = 0; n < numCategories + 2; n++) {
       let firstCategTotCell = xl.getExcelCellRef(startCatRow + 1, startCol + n);
       let lastCategTotCell = xl.getExcelCellRef(categTotRow - 1, startCol + n);
-      worksheet[cW].cell(categTotRow, startCol + n)
-      .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
+      worksheet[cW]
+        .cell(categTotRow, startCol + n)
+        .formula(`SUM(${firstCategTotCell}:${lastCategTotCell})`);
     }
   }
 
@@ -375,15 +403,19 @@ const addFormulas = (cW, payPeriods) => {
   let numOfCategories = categories.length - 1; //don't include 'totals' category
 
   // Add category totals
-  categoryTotals(cW, startCatRow, startCategoryTotCol, categTotRow, numOfCategories);
-
+  categoryTotals(
+    cW,
+    startCatRow,
+    startCategoryTotCol,
+    categTotRow,
+    numOfCategories
+  );
 };
 
 // ------------ ADD STYLES --------------
 
-const addStyles = (workbook,cW, payPeriods) => {
-
-  let payPeriod = payPeriods[cW-1].dates;
+const addStyles = (workbook, cW, payPeriods) => {
+  let payPeriod = payPeriods[cW - 1].dates;
   // let pay_Per2 = bothPayPeriods[cW-1].payPeriod2;
   // let startingRow2 = startingRow + payPeriod.length + tableGap - 1;
 
@@ -395,68 +427,68 @@ const addStyles = (workbook,cW, payPeriods) => {
     },
     border: {
       top: {
-        style: 'thin'
+        style: "thin"
       },
       right: {
-        style: 'thin'
+        style: "thin"
       },
       bottom: {
-        style: 'thin'
+        style: "thin"
       },
       left: {
-        style: 'thin'
+        style: "thin"
       }
     }
   });
 
   var categoryStyle = workbook.createStyle({
     alignment: {
-      textRotation: 45,
+      textRotation: 45
     }
-  })
+  });
 
   var coreCellStyle = workbook.createStyle({
     border: {
       top: {
-        style: 'dotted'
+        style: "dotted"
       },
       right: {
-        style: 'dotted'
+        style: "dotted"
       },
       bottom: {
-        style: 'dotted'
+        style: "dotted"
       },
       left: {
-        style: 'dotted'
+        style: "dotted"
       }
     }
   });
 
   var centerStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'center'
+      horizontal: "center"
     }
   });
 
   var rightStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'right'
+      horizontal: "right"
     }
   });
 
   var noLeftBorder = workbook.createStyle({
     border: {
       left: {
-        style: 'none'
+        style: "none"
       }
     }
   });
 
   var blueFillStyle = workbook.createStyle({
     fill: {
-      type: 'pattern',
-      patternType: 'solid',
-      bgColor: '#0000ff'
+      type: "pattern",
+      patternType: "solid",
+      bgColor: "#0000ff"
     }
   });
 
@@ -466,10 +498,10 @@ const addStyles = (workbook,cW, payPeriods) => {
     },
     border: {
       top: {
-        style: 'double'
+        style: "double"
       },
       left: {
-        style: 'dotted'
+        style: "dotted"
       }
     }
   });
@@ -480,37 +512,36 @@ const addStyles = (workbook,cW, payPeriods) => {
     },
     border: {
       left: {
-        style: 'double'
+        style: "double"
       },
       right: {
-        style: 'thin'
+        style: "thin"
       },
       top: {
-        style: 'dotted'
+        style: "dotted"
       }
-
     }
   });
-  
+
   var dateStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'right'
+      horizontal: "right"
     }
   });
 
   var lightfill = workbook.createStyle({
-      fill: {
-        type: 'pattern',
-        patternType: 'solid',
-        fgColor: 'F2F2F2'
+    fill: {
+      type: "pattern",
+      patternType: "solid",
+      fgColor: "F2F2F2"
     }
   });
 
   var darkfill = workbook.createStyle({
     fill: {
-      type: 'pattern',
-      patternType: 'solid',
-      fgColor: 'D9D9D9'
+      type: "pattern",
+      patternType: "solid",
+      fgColor: "D9D9D9"
     }
   });
 
@@ -526,16 +557,18 @@ const addStyles = (workbook,cW, payPeriods) => {
 
   function styleCategories(cW, firstRow, firstCol, j) {
     worksheet[cW].row(firstRow).setHeight(60);
-    worksheet[cW].cell(firstRow, firstCol + j)
-    .style(titleStyle)
-    .style(centerStyle)
-    .style(categoryStyle);
+    worksheet[cW]
+      .cell(firstRow, firstCol + j)
+      .style(titleStyle)
+      .style(centerStyle)
+      .style(categoryStyle);
   }
 
   function styleCategoryTots(cw, catTotRow, catTotStartCol, j) {
-    worksheet[cW].cell(catTotRow, catTotStartCol + j)
-    .style(bottomTotalsStyle)
-    .style(centerStyle);
+    worksheet[cW]
+      .cell(catTotRow, catTotStartCol + j)
+      .style(bottomTotalsStyle)
+      .style(centerStyle);
   }
 
   // ----  Add title styles and Category Total Styles ------ //
@@ -546,14 +579,12 @@ const addStyles = (workbook,cW, payPeriods) => {
 
     // style category-totals row for first table
     let catTotRow1 = startingRow + payPeriod.length + 1;
-    styleCategoryTots(cW, catTotRow1, startingColumn, j );
-   
+    styleCategoryTots(cW, catTotRow1, startingColumn, j);
+
     // style category-totals row for second table
     // let catTotRow2 = catTotRow1 + pay_Per2.length + tableGap - 1;
     // styleCategoryTots(bothPayPeriods, cW, catTotRow2, startingColumn, j );
-
   }
-
 
   // ----- Add Core Cell Styling ---- //
 
@@ -561,22 +592,23 @@ const addStyles = (workbook,cW, payPeriods) => {
     for (let k = 0; k < categories.length; k++) {
       worksheet[cW].column(startingColumn + 1 + k).setWidth(6); //set width for only core cell columns
       for (l = 0; l < dates.length; l++) {
-        
         //Add light gray color to every other column
         if (k % 2 == 0) {
-          worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+          worksheet[cW]
+            .cell(coreRowStart + l, startingColumn + 1 + k)
             .style(lightfill);
         }
         // if string in the date cell of the column includes "Sat" or "Sun", color the row 'darker' shade of light-gray
         if (dates[l].includes("Sat") || dates[l].includes("Sun")) {
-          worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+          worksheet[cW]
+            .cell(coreRowStart + l, startingColumn + 1 + k)
             .style(darkfill);
         }
         //format cells
-        worksheet[cW].cell( (coreRowStart + l), (startingColumn + 1) + k)
+        worksheet[cW]
+          .cell(coreRowStart + l, startingColumn + 1 + k)
           .style(coreCellStyle)
           .style(centerStyle);
-
       }
     }
   }
@@ -587,23 +619,26 @@ const addStyles = (workbook,cW, payPeriods) => {
   //add styling to core cells for first table
   // styleCoreCells(cW, pay_Per2, startingRow + payPeriod.length + tableGap);
 
-    //add Styling to dates column AND dates total column
+  //add Styling to dates column AND dates total column
 
   function styleDatesColumn(cW, numDates, initRow) {
     for (let i = 0; i < numDates; i++) {
-      worksheet[cW].cell(initRow + i, startingColumn)
-      .style(titleStyle)
-      .style(dateStyle);
+      worksheet[cW]
+        .cell(initRow + i, startingColumn)
+        .style(titleStyle)
+        .style(dateStyle);
     }
     //style bottom "total" title
-    worksheet[cW].cell( (initRow + numDates), startingColumn)
+    worksheet[cW]
+      .cell(initRow + numDates, startingColumn)
       .style(rightStyle)
       .style(noLeftBorder);
   }
 
   function styleDateTotalsColumn(cW, numDates, initRow, totColLoc) {
     for (let p = 0; p < numDates; p++) {
-      worksheet[cW].cell(initRow + p, totColLoc)
+      worksheet[cW]
+        .cell(initRow + p, totColLoc)
         .style(daysTotalStyle)
         .style(centerStyle);
     }
@@ -625,13 +660,13 @@ const addStyles = (workbook,cW, payPeriods) => {
 };
 
 function addNameSignatureDate(workbook, cW, payPeriods) {
-  let targetLine = startingRow + payPeriods[cW-1].dates.length;
+  let targetLine = startingRow + payPeriods[cW - 1].dates.length;
   // let targetLine2 = targetLine + bothPayPeriods[cW-1].payPeriod2.length + tableGap - 1;
 
   let signLineStyle = workbook.createStyle({
     border: {
       top: {
-        style: 'thin'
+        style: "thin"
       }
     },
     font: {
@@ -641,52 +676,89 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
 
   let nameText = workbook.createStyle({
     font: {
-      size: 15,
+      size: 15
     }
   });
 
   //name line
   function nameLine(targetLine) {
+    worksheet[cW]
+      .cell(targetLine + 4, startingColumn)
+      .formula(`='Start Here'!B3`)
+      .style(nameText);
 
-    worksheet[cW].cell( (targetLine + 4), startingColumn)
-    .formula(`='Start Here'!B3`)
-    .style(nameText);
-
-    worksheet[cW].cell( (targetLine + 5), startingColumn)
-      .string('Employee Name (Printed)');
-      worksheet[cW].cell( (targetLine + 5), startingColumn, (targetLine + 5), startingColumn + 2, true)
+    worksheet[cW]
+      .cell(targetLine + 5, startingColumn)
+      .string("Employee Name (Printed)");
+    worksheet[cW]
+      .cell(
+        targetLine + 5,
+        startingColumn,
+        targetLine + 5,
+        startingColumn + 2,
+        true
+      )
       .style(signLineStyle); //merged and formatted
   }
   //signature line
   function signatureLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 5), (startingColumn + 4))
-    .string('Employee Signature');
-    worksheet[cW].cell( (targetLine + 5), startingColumn + 4, (targetLine + 5), startingColumn + 4 + 5, true)
+    worksheet[cW]
+      .cell(targetLine + 5, startingColumn + 4)
+      .string("Employee Signature");
+    worksheet[cW]
+      .cell(
+        targetLine + 5,
+        startingColumn + 4,
+        targetLine + 5,
+        startingColumn + 4 + 5,
+        true
+      )
       .style(signLineStyle); //merged and formatted
   }
   //date line
   function dateLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 5), (startingColumn + 11))
-    .string('Date');
-    worksheet[cW].cell( (targetLine + 5), startingColumn + 11, (targetLine + 5), startingColumn + 11 + 3, true)
-    .style(signLineStyle); //merged and formatted
+    worksheet[cW].cell(targetLine + 5, startingColumn + 11).string("Date");
+    worksheet[cW]
+      .cell(
+        targetLine + 5,
+        startingColumn + 11,
+        targetLine + 5,
+        startingColumn + 11 + 3,
+        true
+      )
+      .style(signLineStyle); //merged and formatted
   }
   //supervisor sign-off line
   function supervisorLine(targetLine) {
-    worksheet[cW].cell( (targetLine + 9), startingColumn + 4)
+    worksheet[cW]
+      .cell(targetLine + 9, startingColumn + 4)
       .string("SFNC Senior Manager Signature");
-    worksheet[cW].cell( (targetLine + 9), startingColumn + 4, (targetLine + 9), (startingColumn + 4 + 5), true)
-      .style(signLineStyle);  //merged and formatted
+    worksheet[cW]
+      .cell(
+        targetLine + 9,
+        startingColumn + 4,
+        targetLine + 9,
+        startingColumn + 4 + 5,
+        true
+      )
+      .style(signLineStyle); //merged and formatted
   }
 
   //supervisor sign-off line
   function sfncManager(targetLine) {
-    worksheet[cW].cell( (targetLine + 9), startingColumn)
+    worksheet[cW]
+      .cell(targetLine + 9, startingColumn)
       .string("Supervisor Signature");
-    worksheet[cW].cell( (targetLine + 9), startingColumn, (targetLine + 9), (startingColumn + 2), true)
-      .style(signLineStyle);  //merged and formatted
+    worksheet[cW]
+      .cell(
+        targetLine + 9,
+        startingColumn,
+        targetLine + 9,
+        startingColumn + 2,
+        true
+      )
+      .style(signLineStyle); //merged and formatted
   }
-
 
   //for sheet1
   nameLine(targetLine);
@@ -699,7 +771,6 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   // signatureLine(targetLine2);
   // dateLine(targetLine2);
   // supervisorLine(targetLine2);
-
 }
 
 module.exports = {
