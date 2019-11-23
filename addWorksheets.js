@@ -1,4 +1,4 @@
-const xl = require('excel4node');
+// const xl = require('excel4node'); //commented out bc not needed here I believe
 const dateGen = require('./dateGenerator');
 const helpers = require('./helpers');
 
