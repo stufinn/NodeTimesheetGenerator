@@ -2,6 +2,7 @@ const xl = require('excel4node');
 const addWorkSheets = require('./addWorksheets');
 const fs = require("fs");
 
+// create a new instance of a Workbook class
 var wb = new xl.Workbook();
 
 // https://stackoverflow.com/questions/6645067/javascript-dynamically-creating-variables-for-loops
