@@ -15,84 +15,85 @@ const payDates = [
     short: 'March 15'
   },
   {
-    full:'March 29, 2019',
-    short: 'March 29',
+    full: 'March 29, 2019',
+    short: 'March 29'
   },
   {
     full: 'April 15, 2019',
-    short: 'April 15',
+    short: 'April 15'
   },
   {
     full: 'April 30, 2019',
-    short: 'April 30',
+    short: 'April 30'
   },
   {
     full: 'May 15, 2019',
-    short: 'May 15',
+    short: 'May 15'
   },
   {
     full: 'May 30, 2019',
-    short: 'May 30',
+    short: 'May 30'
   },
   {
     full: 'June 14, 2019',
-    short: 'June 14',
+    short: 'June 14'
   },
   {
     full: 'June 28, 2019',
-    short: 'June 28',
+    short: 'June 28'
   },
   {
     full: 'July 15, 2019',
-    short: 'July 15',
+    short: 'July 15'
   },
   {
     full: 'July 30, 2019',
-    short: 'July 30',
+    short: 'July 30'
   },
   {
     full: 'August 15, 2019',
-    short: 'Aug 15',
+    short: 'Aug 15'
   },
   {
     full: 'August 30, 2019',
-    short: 'Aug 30',
+    short: 'Aug 30'
   },
   {
     full: 'September 13, 2019',
-    short: 'Sep 13',
+    short: 'Sep 13'
   },
   {
     full: 'September 30, 2019',
-    short: 'Sep 30',
+    short: 'Sep 30'
   },
   {
     full: 'October 15, 2019',
-    short: 'Oct 15',
+    short: 'Oct 15'
   },
   {
     full: 'October 30, 2019',
-    short: 'Oct 30',
+    short: 'Oct 30'
   },
   {
     full: 'November 15, 2019',
-    short: 'Nov 15',
+    short: 'Nov 15'
   },
   {
     full: 'November 29, 2019',
-    short: 'Nov 29',
+    short: 'Nov 29'
   },
   {
     full: 'December 13, 2019',
-    short: 'Dec 13',
+    short: 'Dec 13'
   },
   {
     full: 'December 30, 2019',
-    short: 'Dec 30',
+    short: 'Dec 30'
   }
   // 'Jan 15'
 ];
 
+// Determines the number of sheets that need to be created in the workbook
 const numSheets = payDates.length;
 
 const payPeriods = dateGen.arrayOfDates(year, numSheets, payDates);
@@ -100,20 +101,18 @@ const payPeriods = dateGen.arrayOfDates(year, numSheets, payDates);
 // console.log(payPeriods);
 
 function createAllWorkSheets(workbook) {
-
   //for each of the worksheets (i.e. numSheets), do the following:
   // cW ==> current Worksheet
 
   helpers.addEntrySheet(workbook);
 
   for (let cW = 1; cW < numSheets + 1; cW++) {
-
     //add a worksheet
     helpers.addSheet(workbook, cW, payDates);
 
     //add Sheet titles
     helpers.addSheetTitles(workbook, cW, payDates);
-    
+
     // // //add dates to each sheet
     helpers.addDates(cW, payPeriods);
 
@@ -124,11 +123,10 @@ function createAllWorkSheets(workbook) {
     helpers.addFormulas(cW, payPeriods);
 
     // // //add styles to sheet
-    helpers.addStyles(workbook,cW, payPeriods);
+    helpers.addStyles(workbook, cW, payPeriods);
 
     helpers.addNameSignatureDate(workbook, cW, payPeriods);
-
   }
 }
 
-module.exports = {createAllWorkSheets};
+module.exports = { createAllWorkSheets };
