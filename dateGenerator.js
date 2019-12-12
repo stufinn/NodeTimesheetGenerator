@@ -3,10 +3,23 @@
 // numsheets is the number of sheets that need to be created. It is the length of the paydates array.
 // payDates is an array objects (the pay dates as strings)
 function arrayOfDates(year, numSheets, payDates) {
+  // TEST STUFF
+
+  // ---- This arrow function doesn't currently serve a purpose
+  // const arrayOfDatesNew = (year, payDates) =>
+  //   // Iterate over each date in the array
+  //   payDates.map(date => console.log(date));
+
+  // arrayOfDatesNew(year, payDates);
+  // // Test Stuff
+
+  // -------------------------------------
+
   let startDate = new Date(`Feb 26, ${year}`);
-  // console.log(`Start Date: ${startDate}`);
+  console.log(startDate);
 
   let nextDate = new Date(startDate);
+  console.log(nextDate);
 
   let payPeriods = [];
 
