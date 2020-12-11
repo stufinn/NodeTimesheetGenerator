@@ -1,4 +1,4 @@
-const xl = require("excel4node");
+const xl = require('excel4node');
 // const dateGen = require('./dateGenerator');
 
 // variables to assign where the top left hand corner of the table should occur
@@ -11,97 +11,97 @@ let worksheet = [];
 
 const categories = [
   {
-    name: "Regular",
-    short: "Regular",
-    type: "userEntered"
+    name: 'Regular',
+    short: 'Regular',
+    type: 'userEntered'
   },
   {
-    name: "Progr./Proj.",
-    short: "ProgrProj",
-    type: "userEntered"
+    name: 'Progr./Proj.',
+    short: 'ProgrProj',
+    type: 'userEntered'
   },
   {
-    name: "Sick",
-    short: "Sick",
-    type: "userEntered"
+    name: 'Sick',
+    short: 'Sick',
+    type: 'userEntered'
   },
   {
-    name: "Vacation",
-    short: "Vacay",
-    type: "userEntered"
+    name: 'Vacation',
+    short: 'Vacay',
+    type: 'userEntered'
   },
   {
-    name: "Bank Used",
-    short: "Bank",
-    type: "userEntered"
+    name: 'Bank Used',
+    short: 'Bank',
+    type: 'userEntered'
   },
   {
-    name: "Stat Holiday",
-    short: "Stat",
-    type: "userEntered"
+    name: 'Stat Holiday',
+    short: 'Stat',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom1]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom1]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom2]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom2]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom3]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom3]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom4]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom4]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom5]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom5]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom5]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom5]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom]',
+    type: 'userEntered'
   },
   {
-    name: "[custom]",
-    short: "[custom5]",
-    type: "userEntered"
+    name: '[custom]',
+    short: '[custom5]',
+    type: 'userEntered'
   }
 ];
 
 var worksheetOptions = {
   headerFooter: {
     // 'firstHeader': 'This is the header',
-    evenHeader: "&20Shibogama First Nations Council Semi Monthly Timesheet",
-    oddHeader: "&20Shibogama First Nations Council Semi Monthly Timesheet"
+    evenHeader: '&20Shibogama First Nations Council Semi Monthly Timesheet',
+    oddHeader: '&20Shibogama First Nations Council Semi Monthly Timesheet'
   },
   pageSetup: {
     fitToHeight: 1,
     fitToWidth: 1,
-    orientation: "landscape"
+    orientation: 'landscape'
   },
   printOptions: {
     centerHorizontal: true,
@@ -125,16 +125,16 @@ const addCategToEntry = (entrySheet, workbook) => {
   let thinBorders = workbook.createStyle({
     border: {
       top: {
-        style: "thin"
+        style: 'thin'
       },
       right: {
-        style: "thin"
+        style: 'thin'
       },
       bottom: {
-        style: "thin"
+        style: 'thin'
       },
       left: {
-        style: "thin"
+        style: 'thin'
       }
     }
   });
@@ -147,17 +147,17 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   let highlighted = workbook.createStyle({
     fill: {
-      type: "pattern",
-      patternType: "solid",
-      bgColor: "#fefe56"
+      type: 'pattern',
+      patternType: 'solid',
+      bgColor: '#fefe56'
     }
   });
 
   let highlighted2 = workbook.createStyle({
     fill: {
-      type: "pattern",
-      patternType: "solid",
-      fgColor: "#fefe56"
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#fefe56'
     }
   });
 
@@ -170,12 +170,12 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(1, 1)
-    .string("Shibogama First Nations Council Timesheet Template")
+    .string('Shibogama First Nations Council Timesheet Template')
     .style(mainTitle);
 
   entrySheet
     .cell(3, 1)
-    .string("Employee Name:")
+    .string('Employee Name:')
     .style(boldText);
 
   entrySheet
@@ -185,7 +185,7 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(6, 1)
-    .string("Timesheet Categories")
+    .string('Timesheet Categories')
     .style(boldText);
 
   for (let x = 1; x <= categories.length; x++) {
@@ -200,8 +200,8 @@ const addCategToEntry = (entrySheet, workbook) => {
   // entrySheet.column(4).setWidth(15);
   entrySheet.column(3).setWidth(5);
   //add conditional formatting to highlight certain cells
-  entrySheet.addConditionalFormattingRule("A1:A50", {
-    type: "expression",
+  entrySheet.addConditionalFormattingRule('A1:A50', {
+    type: 'expression',
     priority: 1,
     formula: 'NOT(ISERROR(SEARCH("[custom]", A1)))',
     style: highlighted
@@ -209,7 +209,7 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(7, 3)
-    .string("Instructions")
+    .string('Instructions')
     .style(boldText);
 
   entrySheet
@@ -218,24 +218,24 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(9, 4)
-    .string("These will automatically fill the rest of the worksheet.");
+    .string('These will automatically fill the rest of the worksheet.');
 
   entrySheet
     .cell(11, 3)
-    .string("Adding columns to timesheets")
+    .string('Adding columns to timesheets')
     .style(boldText);
 
   entrySheet
     .cell(12, 4)
-    .string("If you add extra columns to a timesheet, please ensure");
+    .string('If you add extra columns to a timesheet, please ensure');
 
   entrySheet
     .cell(13, 4)
-    .string("that the totals formulas are correct in the new columns.");
+    .string('that the totals formulas are correct in the new columns.');
 
   entrySheet
     .cell(14, 4)
-    .string("The best way to do this is to copy existing columns then ");
+    .string('The best way to do this is to copy existing columns then ');
 
   entrySheet
     .cell(15, 4)
@@ -243,39 +243,39 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(17, 3)
-    .string("Submitting timesheets")
+    .string('Submitting timesheets')
     .style(boldText);
 
   entrySheet
     .cell(18, 4)
-    .string("On the final day of each *reporting* period, the timesheet.");
+    .string('On the final day of each *reporting* period, the timesheet.');
 
   entrySheet
     .cell(19, 4)
-    .string("should be printed, signed and submitted to your supervisor");
+    .string('should be printed, signed and submitted to your supervisor');
 
   entrySheet
     .cell(20, 4)
-    .string("for approval.  For example, the timesheet for the January 30th,");
+    .string('for approval.  For example, the timesheet for the January 30th,');
 
   entrySheet
     .cell(21, 4)
-    .string("2019 pay date should be submitted by Friday January 25th.");
+    .string('2020 pay date should be submitted by Friday January 24th.');
 
   entrySheet
     .cell(23, 3)
-    .string("Saving files")
+    .string('Saving files')
     .style(boldText);
 
   entrySheet
     .cell(24, 4)
-    .string("Timesheet files should be saved on the server to ensure ");
+    .string('Timesheet files should be saved on the server to ensure ');
 
   entrySheet
     .cell(25, 4)
-    .string("information is backed up. Bi-monthy timesheets should be");
+    .string('information is backed up. Bi-monthy timesheets should be');
 
-  entrySheet.cell(26, 4).string("printed and kept on file.");
+  entrySheet.cell(26, 4).string('printed and kept on file.');
 };
 
 const addSheet = (workbook, cW, payDates) => {
@@ -289,7 +289,7 @@ const addSheet = (workbook, cW, payDates) => {
 const addSheetTitles = (workbook, cW, payDates) => {
   let tableTitleStyle = workbook.createStyle({
     alignment: {
-      horizontal: "center"
+      horizontal: 'center'
     },
     font: {
       bold: true,
@@ -328,19 +328,19 @@ const addDates = (cW, payDates) => {
   //insert Total below dates
   worksheet[cW]
     .cell(startingRow + dates.length + 1, startingColumn)
-    .string("Total");
+    .string('Total');
 };
 
 //Add the categories to the tables
 
 const addCategories = (cW, bothPayPeriods) => {
   //add 'date' title
-  worksheet[cW].cell(startingRow, startingColumn).string("Date");
+  worksheet[cW].cell(startingRow, startingColumn).string('Date');
 
   //add "total" title
   worksheet[cW]
     .cell(startingRow, startingColumn + categories.length + 1)
-    .string("Total");
+    .string('Total');
 
   let startList = 7;
 
@@ -427,16 +427,16 @@ const addStyles = (workbook, cW, payPeriods) => {
     },
     border: {
       top: {
-        style: "thin"
+        style: 'thin'
       },
       right: {
-        style: "thin"
+        style: 'thin'
       },
       bottom: {
-        style: "thin"
+        style: 'thin'
       },
       left: {
-        style: "thin"
+        style: 'thin'
       }
     }
   });
@@ -450,45 +450,45 @@ const addStyles = (workbook, cW, payPeriods) => {
   var coreCellStyle = workbook.createStyle({
     border: {
       top: {
-        style: "dotted"
+        style: 'dotted'
       },
       right: {
-        style: "dotted"
+        style: 'dotted'
       },
       bottom: {
-        style: "dotted"
+        style: 'dotted'
       },
       left: {
-        style: "dotted"
+        style: 'dotted'
       }
     }
   });
 
   var centerStyle = workbook.createStyle({
     alignment: {
-      horizontal: "center"
+      horizontal: 'center'
     }
   });
 
   var rightStyle = workbook.createStyle({
     alignment: {
-      horizontal: "right"
+      horizontal: 'right'
     }
   });
 
   var noLeftBorder = workbook.createStyle({
     border: {
       left: {
-        style: "none"
+        style: 'none'
       }
     }
   });
 
   var blueFillStyle = workbook.createStyle({
     fill: {
-      type: "pattern",
-      patternType: "solid",
-      bgColor: "#0000ff"
+      type: 'pattern',
+      patternType: 'solid',
+      bgColor: '#0000ff'
     }
   });
 
@@ -498,10 +498,10 @@ const addStyles = (workbook, cW, payPeriods) => {
     },
     border: {
       top: {
-        style: "double"
+        style: 'double'
       },
       left: {
-        style: "dotted"
+        style: 'dotted'
       }
     }
   });
@@ -512,36 +512,36 @@ const addStyles = (workbook, cW, payPeriods) => {
     },
     border: {
       left: {
-        style: "double"
+        style: 'double'
       },
       right: {
-        style: "thin"
+        style: 'thin'
       },
       top: {
-        style: "dotted"
+        style: 'dotted'
       }
     }
   });
 
   var dateStyle = workbook.createStyle({
     alignment: {
-      horizontal: "right"
+      horizontal: 'right'
     }
   });
 
   var lightfill = workbook.createStyle({
     fill: {
-      type: "pattern",
-      patternType: "solid",
-      fgColor: "F2F2F2"
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: 'F2F2F2'
     }
   });
 
   var darkfill = workbook.createStyle({
     fill: {
-      type: "pattern",
-      patternType: "solid",
-      fgColor: "D9D9D9"
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: 'D9D9D9'
     }
   });
 
@@ -599,7 +599,7 @@ const addStyles = (workbook, cW, payPeriods) => {
             .style(lightfill);
         }
         // if string in the date cell of the column includes "Sat" or "Sun", color the row 'darker' shade of light-gray
-        if (dates[l].includes("Sat") || dates[l].includes("Sun")) {
+        if (dates[l].includes('Sat') || dates[l].includes('Sun')) {
           worksheet[cW]
             .cell(coreRowStart + l, startingColumn + 1 + k)
             .style(darkfill);
@@ -666,7 +666,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   let signLineStyle = workbook.createStyle({
     border: {
       top: {
-        style: "thin"
+        style: 'thin'
       }
     },
     font: {
@@ -689,7 +689,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
 
     worksheet[cW]
       .cell(targetLine + 5, startingColumn)
-      .string("Employee Name (Printed)");
+      .string('Employee Name (Printed)');
     worksheet[cW]
       .cell(
         targetLine + 5,
@@ -704,7 +704,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   function signatureLine(targetLine) {
     worksheet[cW]
       .cell(targetLine + 5, startingColumn + 4)
-      .string("Employee Signature");
+      .string('Employee Signature');
     worksheet[cW]
       .cell(
         targetLine + 5,
@@ -717,7 +717,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   }
   //date line
   function dateLine(targetLine) {
-    worksheet[cW].cell(targetLine + 5, startingColumn + 11).string("Date");
+    worksheet[cW].cell(targetLine + 5, startingColumn + 11).string('Date');
     worksheet[cW]
       .cell(
         targetLine + 5,
@@ -732,7 +732,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   function supervisorLine(targetLine) {
     worksheet[cW]
       .cell(targetLine + 9, startingColumn + 4)
-      .string("SFNC Senior Manager Signature");
+      .string('SFNC Senior Manager Signature');
     worksheet[cW]
       .cell(
         targetLine + 9,
@@ -748,7 +748,7 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   function sfncManager(targetLine) {
     worksheet[cW]
       .cell(targetLine + 9, startingColumn)
-      .string("Supervisor Signature");
+      .string('Supervisor Signature');
     worksheet[cW]
       .cell(
         targetLine + 9,
