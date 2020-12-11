@@ -6,106 +6,106 @@ const helpers = require('./helpers');
 // Array of objects allows for more flexibility with the data (i.e. shortnames etc)
 
 // let firstDueDay = 26; //day of the month when timesheet for _first_ monthly pay period is due
-let year = 2020;
+let year = 2021;
 // let numMonths = 12;
 
 const payDates = [
   {
-    full: 'January 15, 2020',
-    short: 'January 15'
+    full: 'January 15, 2021',
+    short: 'January 15',
   },
   {
-    full: 'January 30, 2020',
-    short: 'January 30'
+    full: 'January 30, 2021',
+    short: 'January 30',
   },
   {
-    full: 'February 14, 2020',
-    short: 'February 14'
+    full: 'February 14, 2021',
+    short: 'February 14',
   },
   {
-    full: 'February 28, 2020',
-    short: 'February 28'
+    full: 'February 28, 2021',
+    short: 'February 28',
   },
   {
-    full: 'March 13, 2020',
-    short: 'March 13'
+    full: 'March 13, 2021',
+    short: 'March 13',
   },
   {
-    full: 'March 30, 2020',
-    short: 'March 30'
+    full: 'March 30, 2021',
+    short: 'March 30',
   },
   {
-    full: 'April 15, 2020',
-    short: 'April 15'
+    full: 'April 15, 2021',
+    short: 'April 15',
   },
   {
-    full: 'April 30, 2020',
-    short: 'April 30'
+    full: 'April 30, 2021',
+    short: 'April 30',
   },
   {
-    full: 'May 15, 2020',
-    short: 'May 15'
+    full: 'May 15, 2021',
+    short: 'May 15',
   },
   {
-    full: 'May 29, 2020',
-    short: 'May 29'
+    full: 'May 29, 2021',
+    short: 'May 29',
   },
   {
-    full: 'June 15, 2020',
-    short: 'June 15'
+    full: 'June 15, 2021',
+    short: 'June 15',
   },
   {
-    full: 'June 30, 2020',
-    short: 'June 30'
+    full: 'June 30, 2021',
+    short: 'June 30',
   },
   {
-    full: 'July 15, 2020',
-    short: 'July 15'
+    full: 'July 15, 2021',
+    short: 'July 15',
   },
   {
-    full: 'July 30, 2020',
-    short: 'July 30'
+    full: 'July 30, 2021',
+    short: 'July 30',
   },
   {
-    full: 'August 14, 2020',
-    short: 'Aug 14'
+    full: 'August 14, 2021',
+    short: 'Aug 14',
   },
   {
-    full: 'August 28, 2020',
-    short: 'Aug 28'
+    full: 'August 28, 2021',
+    short: 'Aug 28',
   },
   {
-    full: 'September 15, 2020',
-    short: 'Sep 15'
+    full: 'September 15, 2021',
+    short: 'Sep 15',
   },
   {
-    full: 'September 30, 2020',
-    short: 'Sep 30'
+    full: 'September 30, 2021',
+    short: 'Sep 30',
   },
   {
-    full: 'October 15, 2020',
-    short: 'Oct 15'
+    full: 'October 15, 2021',
+    short: 'Oct 15',
   },
   {
-    full: 'October 30, 2020',
-    short: 'Oct 30'
+    full: 'October 30, 2021',
+    short: 'Oct 30',
   },
   {
-    full: 'November 13, 2020',
-    short: 'Nov 13'
+    full: 'November 13, 2021',
+    short: 'Nov 13',
   },
   {
-    full: 'November 30, 2020',
-    short: 'Nov 30'
+    full: 'November 30, 2021',
+    short: 'Nov 30',
   },
   {
-    full: 'December 15, 2020',
-    short: 'Dec 15'
+    full: 'December 15, 2021',
+    short: 'Dec 15',
   },
   {
-    full: 'December 30, 2020',
-    short: 'Dec 30'
-  }
+    full: 'December 30, 2021',
+    short: 'Dec 30',
+  },
   // 'Jan 15'
 ];
 
