@@ -15,16 +15,16 @@ const payDates = [
     short: 'January 15',
   },
   {
-    full: 'January 30, 2021',
-    short: 'January 30',
+    full: 'January 29, 2021',
+    short: 'January 29',
   },
   {
-    full: 'February 14, 2021',
-    short: 'February 14',
+    full: 'February 15, 2021',
+    short: 'February 15',
   },
   {
-    full: 'February 28, 2021',
-    short: 'February 28',
+    full: 'February 26, 2021',
+    short: 'February 26',
   },
   {
     full: 'March 13, 2021',
@@ -106,7 +106,6 @@ const payDates = [
     full: 'December 30, 2021',
     short: 'Dec 30',
   },
-  // 'Jan 15'
 ];
 
 // Determines the number of sheets that need to be created in the workbook

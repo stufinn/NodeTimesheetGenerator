@@ -11,107 +11,107 @@ let worksheet = [];
 
 const categories = [
   {
-    name: 'Regular',
+    name: 'Regular Program',
     short: 'Regular',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
-    name: 'Progr./Proj.',
-    short: 'ProgrProj',
-    type: 'userEntered'
+    name: 'Stat Worked',
+    short: 'StatWorked',
+    type: 'userEntered',
   },
   {
-    name: 'Sick',
-    short: 'Sick',
-    type: 'userEntered'
+    name: 'Stat Not Worked',
+    short: 'StatNotWorked',
+    type: 'userEntered',
   },
   {
     name: 'Vacation',
     short: 'Vacay',
-    type: 'userEntered'
+    type: 'userEntered',
+  },
+  {
+    name: 'Sick',
+    short: 'Sick',
+    type: 'userEntered',
   },
   {
     name: 'Bank Used',
     short: 'Bank',
-    type: 'userEntered'
-  },
-  {
-    name: 'Stat Holiday',
-    short: 'Stat',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom1]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom2]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom3]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom4]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom5]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom5]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom5]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom5]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom]',
-    type: 'userEntered'
+    type: 'userEntered',
   },
   {
     name: '[custom]',
     short: '[custom5]',
-    type: 'userEntered'
-  }
+    type: 'userEntered',
+  },
 ];
 
 var worksheetOptions = {
   headerFooter: {
     // 'firstHeader': 'This is the header',
     evenHeader: '&20Shibogama First Nations Council Semi Monthly Timesheet',
-    oddHeader: '&20Shibogama First Nations Council Semi Monthly Timesheet'
+    oddHeader: '&20Shibogama First Nations Council Semi Monthly Timesheet',
   },
   pageSetup: {
     fitToHeight: 1,
     fitToWidth: 1,
-    orientation: 'landscape'
+    orientation: 'landscape',
   },
   printOptions: {
     centerHorizontal: true,
-    centerVertical: true
-  }
+    centerVertical: true,
+  },
 };
 
 // ADD and style "entry" sheet
 
-const addEntrySheet = workbook => {
+const addEntrySheet = (workbook) => {
   //assign the first worksheet this variable name
   var entrySheet = workbook.addWorksheet(`Start Here`, worksheetOptions);
 
@@ -125,47 +125,47 @@ const addCategToEntry = (entrySheet, workbook) => {
   let thinBorders = workbook.createStyle({
     border: {
       top: {
-        style: 'thin'
+        style: 'thin',
       },
       right: {
-        style: 'thin'
+        style: 'thin',
       },
       bottom: {
-        style: 'thin'
+        style: 'thin',
       },
       left: {
-        style: 'thin'
-      }
-    }
+        style: 'thin',
+      },
+    },
   });
 
   let boldText = workbook.createStyle({
     font: {
-      bold: true
-    }
+      bold: true,
+    },
   });
 
   let highlighted = workbook.createStyle({
     fill: {
       type: 'pattern',
       patternType: 'solid',
-      bgColor: '#fefe56'
-    }
+      bgColor: '#fefe56',
+    },
   });
 
   let highlighted2 = workbook.createStyle({
     fill: {
       type: 'pattern',
       patternType: 'solid',
-      fgColor: '#fefe56'
-    }
+      fgColor: '#fefe56',
+    },
   });
 
   let mainTitle = workbook.createStyle({
     font: {
       size: 20,
-      bold: true
-    }
+      bold: true,
+    },
   });
 
   entrySheet
@@ -173,20 +173,14 @@ const addCategToEntry = (entrySheet, workbook) => {
     .string('Shibogama First Nations Council Timesheet Template')
     .style(mainTitle);
 
-  entrySheet
-    .cell(3, 1)
-    .string('Employee Name:')
-    .style(boldText);
+  entrySheet.cell(3, 1).string('Employee Name:').style(boldText);
 
   entrySheet
     .cell(3, 2, 3, 4, true)
     .string('[Enter in "Start Here" sheet]')
     .style(highlighted2);
 
-  entrySheet
-    .cell(6, 1)
-    .string('Timesheet Categories')
-    .style(boldText);
+  entrySheet.cell(6, 1).string('Timesheet Categories').style(boldText);
 
   for (let x = 1; x <= categories.length; x++) {
     //add categories to the entry sheet
@@ -204,13 +198,10 @@ const addCategToEntry = (entrySheet, workbook) => {
     type: 'expression',
     priority: 1,
     formula: 'NOT(ISERROR(SEARCH("[custom]", A1)))',
-    style: highlighted
+    style: highlighted,
   });
 
-  entrySheet
-    .cell(7, 3)
-    .string('Instructions')
-    .style(boldText);
+  entrySheet.cell(7, 3).string('Instructions').style(boldText);
 
   entrySheet
     .cell(8, 4)
@@ -220,10 +211,7 @@ const addCategToEntry = (entrySheet, workbook) => {
     .cell(9, 4)
     .string('These will automatically fill the rest of the worksheet.');
 
-  entrySheet
-    .cell(11, 3)
-    .string('Adding columns to timesheets')
-    .style(boldText);
+  entrySheet.cell(11, 3).string('Adding columns to timesheets').style(boldText);
 
   entrySheet
     .cell(12, 4)
@@ -241,10 +229,7 @@ const addCategToEntry = (entrySheet, workbook) => {
     .cell(15, 4)
     .string('right-click and select "insert copied cells".');
 
-  entrySheet
-    .cell(17, 3)
-    .string('Submitting timesheets')
-    .style(boldText);
+  entrySheet.cell(17, 3).string('Submitting timesheets').style(boldText);
 
   entrySheet
     .cell(18, 4)
@@ -262,10 +247,7 @@ const addCategToEntry = (entrySheet, workbook) => {
     .cell(21, 4)
     .string('2020 pay date should be submitted by Friday January 24th.');
 
-  entrySheet
-    .cell(23, 3)
-    .string('Saving files')
-    .style(boldText);
+  entrySheet.cell(23, 3).string('Saving files').style(boldText);
 
   entrySheet
     .cell(24, 4)
@@ -289,12 +271,12 @@ const addSheet = (workbook, cW, payDates) => {
 const addSheetTitles = (workbook, cW, payDates) => {
   let tableTitleStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'center'
+      horizontal: 'center',
     },
     font: {
       bold: true,
-      size: 20
-    }
+      size: 20,
+    },
   });
 
   function addTitle(titleRow, title) {
@@ -328,19 +310,19 @@ const addDates = (cW, payDates) => {
   //insert Total below dates
   worksheet[cW]
     .cell(startingRow + dates.length + 1, startingColumn)
-    .string('Total');
+    .string('TOTAL');
 };
 
 //Add the categories to the tables
 
 const addCategories = (cW, bothPayPeriods) => {
   //add 'date' title
-  worksheet[cW].cell(startingRow, startingColumn).string('Date');
+  worksheet[cW].cell(startingRow, startingColumn).string('DATE');
 
   //add "total" title
   worksheet[cW]
     .cell(startingRow, startingColumn + categories.length + 1)
-    .string('Total');
+    .string('TOTAL');
 
   let startList = 7;
 
@@ -423,126 +405,130 @@ const addStyles = (workbook, cW, payPeriods) => {
   var titleStyle = workbook.createStyle({
     font: {
       size: 12,
-      bold: true
+      bold: true,
     },
     border: {
       top: {
-        style: 'thin'
+        style: 'thin',
       },
       right: {
-        style: 'thin'
+        style: 'thin',
       },
       bottom: {
-        style: 'thin'
+        style: 'thin',
       },
       left: {
-        style: 'thin'
-      }
-    }
+        style: 'thin',
+      },
+    },
   });
 
   var categoryStyle = workbook.createStyle({
     alignment: {
-      textRotation: 45
-    }
+      textRotation: 45,
+    },
+    font: {
+      bold: true,
+      size: 14,
+    },
   });
 
   var coreCellStyle = workbook.createStyle({
     border: {
       top: {
-        style: 'dotted'
+        style: 'dotted',
       },
       right: {
-        style: 'dotted'
+        style: 'dotted',
       },
       bottom: {
-        style: 'dotted'
+        style: 'dotted',
       },
       left: {
-        style: 'dotted'
-      }
-    }
+        style: 'dotted',
+      },
+    },
   });
 
   var centerStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'center'
-    }
+      horizontal: 'center',
+    },
   });
 
   var rightStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'right'
-    }
+      horizontal: 'right',
+    },
   });
 
   var noLeftBorder = workbook.createStyle({
     border: {
       left: {
-        style: 'none'
-      }
-    }
+        style: 'none',
+      },
+    },
   });
 
   var blueFillStyle = workbook.createStyle({
     fill: {
       type: 'pattern',
       patternType: 'solid',
-      bgColor: '#0000ff'
-    }
+      bgColor: '#0000ff',
+    },
   });
 
   var bottomTotalsStyle = workbook.createStyle({
     font: {
-      bold: true
+      bold: true,
     },
     border: {
       top: {
-        style: 'double'
+        style: 'double',
       },
       left: {
-        style: 'dotted'
-      }
-    }
+        style: 'dotted',
+      },
+    },
   });
 
   var daysTotalStyle = workbook.createStyle({
     font: {
-      bold: true
+      bold: true,
     },
     border: {
       left: {
-        style: 'double'
+        style: 'double',
       },
       right: {
-        style: 'thin'
+        style: 'thin',
       },
       top: {
-        style: 'dotted'
-      }
-    }
+        style: 'dotted',
+      },
+    },
   });
 
   var dateStyle = workbook.createStyle({
     alignment: {
-      horizontal: 'right'
-    }
+      horizontal: 'right',
+    },
   });
 
   var lightfill = workbook.createStyle({
     fill: {
       type: 'pattern',
       patternType: 'solid',
-      fgColor: 'F2F2F2'
-    }
+      fgColor: 'F2F2F2',
+    },
   });
 
   var darkfill = workbook.createStyle({
     fill: {
       type: 'pattern',
       patternType: 'solid',
-      fgColor: 'D9D9D9'
-    }
+      fgColor: 'D9D9D9',
+    },
   });
 
   // fill: {
@@ -556,7 +542,7 @@ const addStyles = (workbook, cW, payPeriods) => {
   // ----- Add styling to Categories row AND bottom totals row --- //
 
   function styleCategories(cW, firstRow, firstCol, j) {
-    worksheet[cW].row(firstRow).setHeight(60);
+    worksheet[cW].row(firstRow).setHeight(85);
     worksheet[cW]
       .cell(firstRow, firstCol + j)
       .style(titleStyle)
@@ -666,18 +652,18 @@ function addNameSignatureDate(workbook, cW, payPeriods) {
   let signLineStyle = workbook.createStyle({
     border: {
       top: {
-        style: 'thin'
-      }
+        style: 'thin',
+      },
     },
     font: {
-      bold: true
-    }
+      bold: true,
+    },
   });
 
   let nameText = workbook.createStyle({
     font: {
-      size: 15
-    }
+      size: 15,
+    },
   });
 
   //name line
@@ -781,5 +767,5 @@ module.exports = {
   addCategories,
   addFormulas,
   addNameSignatureDate,
-  addEntrySheet
+  addEntrySheet,
 };
