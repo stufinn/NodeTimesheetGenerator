@@ -10,103 +10,107 @@ let year = 2021;
 // let numMonths = 12;
 
 const payDates = [
-  {
-    full: 'January 15, 2021',
-    short: 'January 15',
-  },
-  {
-    full: 'January 29, 2021',
-    short: 'January 29',
-  },
-  {
-    full: 'February 15, 2021',
-    short: 'February 15',
-  },
-  {
-    full: 'February 26, 2021',
-    short: 'February 26',
-  },
-  {
-    full: 'March 13, 2021',
-    short: 'March 13',
-  },
-  {
-    full: 'March 30, 2021',
-    short: 'March 30',
-  },
-  {
-    full: 'April 15, 2021',
-    short: 'April 15',
-  },
-  {
-    full: 'April 30, 2021',
-    short: 'April 30',
-  },
-  {
-    full: 'May 15, 2021',
-    short: 'May 15',
-  },
-  {
-    full: 'May 29, 2021',
-    short: 'May 29',
-  },
-  {
-    full: 'June 15, 2021',
-    short: 'June 15',
-  },
-  {
-    full: 'June 30, 2021',
-    short: 'June 30',
-  },
-  {
-    full: 'July 15, 2021',
-    short: 'July 15',
-  },
-  {
-    full: 'July 30, 2021',
-    short: 'July 30',
-  },
-  {
-    full: 'August 14, 2021',
-    short: 'Aug 14',
-  },
-  {
-    full: 'August 28, 2021',
-    short: 'Aug 28',
-  },
-  {
-    full: 'September 15, 2021',
-    short: 'Sep 15',
-  },
-  {
-    full: 'September 30, 2021',
-    short: 'Sep 30',
-  },
-  {
-    full: 'October 15, 2021',
-    short: 'Oct 15',
-  },
-  {
-    full: 'October 30, 2021',
-    short: 'Oct 30',
-  },
-  {
-    full: 'November 13, 2021',
-    short: 'Nov 13',
-  },
-  {
-    full: 'November 30, 2021',
-    short: 'Nov 30',
-  },
-  {
-    full: 'December 15, 2021',
-    short: 'Dec 15',
-  },
-  {
-    full: 'December 30, 2021',
-    short: 'Dec 30',
-  },
-];
+    {
+      full: `January 15, 2021`,
+      short: `January 15`,
+    },
+    {
+      full: `January 29, 2021`,
+      short: `January 29`,
+    },
+    {
+      full: `February 12, 2021`,
+      short: `February 12`,
+    },
+    {
+      full: `February 26, 2021`,
+      short: `February 26`,
+    },
+    {
+      full: `March 15, 2021`,
+      short: `March 15`,
+    },
+    {
+      full: `March 30, 2021`,
+      short: `March 30`,
+    },
+    {
+      full: `April 15, 2021`,
+      short: `April 15`,
+    },
+    {
+      full: `April 30, 2021`,
+      short: `April 30`,
+    },
+    {
+      full: `May 14, 2021`,
+      short: `May 14`,
+    },
+    {
+      full: `May 28, 2021`,
+      short: `May 28`,
+    },
+    {
+      full: `June 15, 2021`,
+      short: `June 15`,
+    },
+    {
+      full: `June 30, 2021`,
+      short: `June 30`,
+    },
+    {
+      full: `July 15, 2021`,
+      short: `July 15`,
+    },
+    {
+      full: `July 30, 2021`,
+      short: `July 30`,
+    },
+    {
+      full: `August 13, 2021`,
+      short: `Aug 13`,
+    },
+    {
+      full: `August 30, 2021`,
+      short: `Aug 30`,
+    },
+    {
+      full: `September 15, 2021`,
+      short: `Sep 15`,
+    },
+    {
+      full: `September 30, 2021`,
+      short: `Sep 30`,
+    },
+    {
+      full: `October 15, 2021`,
+      short: `Oct 15`,
+    },
+    {
+      full: `October 29, 2021`,
+      short: `Oct 29`,
+    },
+    {
+      full: `November 15, 2021`,
+      short: `Nov 15`,
+    },
+    {
+      full: `November 30, 2021`,
+      short: `Nov 30`,
+    },
+    {
+      full: `December 15, 2021`,
+      short: `Dec 15`,
+    },
+    {
+      full: `December 30, 2021`,
+      short: `Dec 30`,
+    },
+  ];
+  
+
+
+
 
 // Determines the number of sheets that need to be created in the workbook
 const numSheets = payDates.length;
