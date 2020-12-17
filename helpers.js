@@ -241,11 +241,11 @@ const addCategToEntry = (entrySheet, workbook) => {
 
   entrySheet
     .cell(20, 4)
-    .string('for approval.  For example, the timesheet for the January 30th,');
+    .string('for approval.  For example, the timesheet for the January 29th,');
 
   entrySheet
     .cell(21, 4)
-    .string('2020 pay date should be submitted by Friday January 24th.');
+    .string('2021 pay date should be submitted by Monday, January 25th.');
 
   entrySheet.cell(23, 3).string('Saving files').style(boldText);
 
