@@ -12,7 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "excel4node": "^1.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nodemon": "^1.18.9"
   }
 }
